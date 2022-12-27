@@ -8,9 +8,8 @@ import Result from "../Result/Result";
 const { Configuration, OpenAIApi } = require("openai");
 
 function Home() {
-
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: "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",
   });
 
   const openai = new OpenAIApi(configuration);
@@ -23,15 +22,12 @@ function Home() {
 
   const { register, handleSubmit, reset } = useForm();
 
-
   // const querry = `Create business checklist for a company of ${15} employees providing ${Web - development} services using ${DrupalMagneto} frameworks working in the ${Healthcare - Education} industries.`
 
   const onSubmit = async (data) => {
-
-    setUserData(data)
+    setUserData(data);
     setLoading(true);
     const completion = await openai.createCompletion({
-
       model: "text-davinci-003",
       prompt: `Write 10 business development Activity ${data?.selectedServices?.toString()} agency should do to get new clients for agency`,
       max_tokens: 450,
@@ -112,7 +108,6 @@ function Home() {
     <div className="rt-home mt-5">
       {bdData.length === 0 ? (
         <Row className="justify-content-md-center">
-
           <Col md="auto">
             <h3>Please fill up the below information to proceed:</h3>
 
@@ -120,8 +115,6 @@ function Home() {
               className="mt-3 bg-light p-4 shadow mb-3 rounded"
               onSubmit={handleSubmit(onSubmit)}
             >
-
-
               <Row>
                 <Col>
                   <Form.Group
@@ -149,9 +142,11 @@ function Home() {
                   placeholder="Number of peoples"
                 /> */}
 
-
                     <Form.Label>Agency Size: </Form.Label>
-                    <Form.Select aria-label="Default select example"  {...register("agencySize", { required: true })}>
+                    <Form.Select
+                      aria-label="Default select example"
+                      {...register("agencySize", { required: true })}
+                    >
                       <option>Select your Agency Size</option>
                       <option value="small">(1-10) Persons</option>
                       <option value="small">(11-20) Persons</option>
@@ -162,15 +157,13 @@ function Home() {
                 </Col>
               </Row>
 
-
-
-
-
-
               <Row>
                 <Col>
                   <div className="mb-4">
-                    <Form.Label> Choose Your Services : (Pick 2 For Best Result ) </Form.Label>
+                    <Form.Label>
+                      {" "}
+                      Choose Your Services : (Pick 2 For Best Result ){" "}
+                    </Form.Label>
                     {services.map((item, index) => (
                       <Form.Check
                         key={index}
@@ -184,7 +177,10 @@ function Home() {
                 </Col>
                 <Col>
                   <div className="mb-4">
-                    <Form.Label> Choose Your Framework : (Pick 2 For Best Result ) </Form.Label>
+                    <Form.Label>
+                      {" "}
+                      Choose Your Framework : (Pick 2 For Best Result ){" "}
+                    </Form.Label>
                     {frameWorks.map((item, index) => (
                       <Form.Check
                         key={index}
@@ -199,7 +195,11 @@ function Home() {
               </Row>
 
               <div className="mb-4">
-                <Form.Label> Choose Your Industry : (Pick 2 For Best Result ) </Form.Label> <br />
+                <Form.Label>
+                  {" "}
+                  Choose Your Industry : (Pick 2 For Best Result ){" "}
+                </Form.Label>{" "}
+                <br />
                 {industry.map((item, index) => (
                   <Form.Check
                     inline
@@ -212,30 +212,26 @@ function Home() {
                 ))}
               </div>
 
-
-              {
-                isLoading
-                  ?
-                  <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                  />
-                  :
-                  <Button
-                    variant="primary"
-                    type="submit"
-                  >Submit
-                  </Button>
-              }
-
+              {isLoading ? (
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              ) : (
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
+              )}
             </Form>
           </Col>
         </Row>
       ) : (
-        <Result bdData={bdData} userData={userData}
+        <Result
+          bdData={bdData}
+          userData={userData}
           marketing={marketing}
           goals={goals}
         ></Result>
