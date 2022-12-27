@@ -13,6 +13,7 @@ function Home() {
   });
 
   const openai = new OpenAIApi(configuration);
+
   const [bdData, setBdData] = useState([]);
   const [userData, setUserData] = useState([]);
   const [marketing, setMarketing] = useState([]);
