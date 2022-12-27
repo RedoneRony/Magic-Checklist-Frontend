@@ -20,7 +20,6 @@ function Home() {
   const [goals, setGoals] = useState([]);
 
   const [isLoading, setLoading] = useState(false);
-
   const { register, handleSubmit, reset } = useForm();
 
   // const querry = `Create business checklist for a company of ${15} employees providing ${Web - development} services using ${DrupalMagneto} frameworks working in the ${Healthcare - Education} industries.`
