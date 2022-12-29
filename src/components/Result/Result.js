@@ -187,8 +187,7 @@ const Result = ({
 
               <div className="mb-4 p-4">
                 <Form.Label>
-                  Here is a suggested 6-month content plan for Marketing: here
-                  is a suggested 6-month content plan for a {service}
+                  Here is a suggested 6-month content plan for a {service}
                   agency writing about {framework}:
                 </Form.Label>
                 {formatedMarktingData2 ? (
