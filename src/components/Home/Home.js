@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Col, Row, Form, Button, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import countryList from "react-select-country-list";
+import { redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Home.css";
 import Result from "../Result/Result";
@@ -15,21 +16,31 @@ function Home() {
   const openai = new OpenAIApi(configuration);
 
   const [bdData, setBdData] = useState([]);
+  const [bdData1, setBdData1] = useState([]);
+  const [bdData2, setBdData2] = useState([]);
   const [userData, setUserData] = useState([]);
   const [marketing, setMarketing] = useState([]);
+  const [marketing1, setMarketing1] = useState([]);
+  const [marketing2, setMarketing2] = useState([]);
   const [goals, setGoals] = useState([]);
+  const [goals1, setGoals1] = useState([]);
+  const [service, setService] = useState("");
+  const [framework, setFramework] = useState("");
 
   const [isLoading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
-  // const querry = `Create business checklist for a company of ${15} employees providing ${Web - development} services using ${DrupalMagneto} frameworks working in the ${Healthcare - Education} industries.`
+  // country options
+  const options = useMemo(() => countryList().getData(), []);
 
   const onSubmit = async (data) => {
     setUserData(data);
+    setService(data?.selectedServices?.toString());
+    setFramework(data?.selectedFramework?.toString());
     setLoading(true);
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write 10 business development Activity ${data?.selectedServices?.toString()} agency should do to get new clients for agency`,
+      prompt: `Write 20 business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency`,
       max_tokens: 450,
       temperature: 1,
     });
@@ -37,19 +48,60 @@ function Home() {
 
     const completion2 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write  10 points on how an ${data?.selectedFramework?.toString()} agency can make a marketing plan for their business:`,
+      prompt: `Here are five types of sales activities that a ${data?.selectedServices?.toString()} agency can do`,
       max_tokens: 450,
       temperature: 1,
     });
-    setMarketing(completion2?.data?.choices);
+    setBdData1(completion2?.data?.choices);
 
     const completion3 = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `List of 5 market place ${data?.selectedServices?.toString()} agency can find work with link to those website. Do not include Linkedin`,
+      max_tokens: 450,
+      temperature: 1,
+    });
+    setBdData2(completion3?.data?.choices);
+
+    const completion4 = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `Write  10 bullet points on how an ${data?.selectedFramework?.toString()} agency can make a marketing plan for their business:`,
+      max_tokens: 450,
+      temperature: 1,
+    });
+    setMarketing(completion4?.data?.choices);
+
+    const completion5 = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `Write  5 bullet points  list  ${data?.selectedFramework?.toString()} agency  where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`,
+      max_tokens: 450,
+      temperature: 1,
+    });
+    setMarketing1(completion5?.data?.choices);
+
+    const completion6 = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `Write me a 6 months Content plan for ${data?.selectedServices?.toString()} Agency writing about ${data?.selectedFramework?.toString()}`,
+      max_tokens: 450,
+      temperature: 1,
+    });
+    setMarketing2(completion6?.data?.choices);
+
+    const completion7 = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `3 sample okr for ${data?.agencySize?.toString()} web development agency For Q1 to get more leads and warm leads for ${data?.selectedIndustry?.toString()}`,
+      max_tokens: 450,
+      temperature: 1,
+    });
+
+    setGoals(completion7?.data?.choices);
+
+    const completion8 = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `3 sample okr for year 2023 ${data?.selectedServices?.toString()} agency niching industry ${data?.selectedIndustry?.toString()}`,
       max_tokens: 450,
       temperature: 1,
     });
-    setGoals(completion3?.data?.choices);
+    setGoals1(completion8?.data?.choices);
 
     setLoading(false);
     reset();
@@ -134,24 +186,36 @@ function Home() {
                     className="mb-4"
                     controlId="exampleForm.ControlInput1"
                   >
-                    {/* <Form.Label>Agency Size:</Form.Label>
-                    <Form.Control
-                  {...register("agencySize", { required: true })}
-                  onChange={(e) => setAgencySize(e.target.value)}
-                  type="number"
-                  placeholder="Number of peoples"
-                /> */}
-
                     <Form.Label>Agency Size: </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
                       {...register("agencySize", { required: true })}
                     >
                       <option>Select your Agency Size</option>
-                      <option value="small">(1-10) Persons</option>
-                      <option value="small">(11-20) Persons</option>
-                      <option value="medium">(21-50) Persons</option>
-                      <option value="large">50+ Persons</option>
+                      <option value="small">(1-10)</option>
+                      <option value="small">(11-20)</option>
+                      <option value="medium">(21-50)</option>
+                      <option value="large">50+</option>
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col>
+                  <Form.Group
+                    className="mb-4"
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label>Location: </Form.Label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      {...register("agencyLocation", { required: true })}
+                    >
+                      <option disabled>Select your Location</option>
+                      {options.map((x) => (
+                        <option key={x.value}>{x.label}</option>
+                      ))}
                     </Form.Select>
                   </Form.Group>
                 </Col>
@@ -231,9 +295,16 @@ function Home() {
       ) : (
         <Result
           bdData={bdData}
+          bdData1={bdData1}
+          bdData2={bdData2}
           userData={userData}
           marketing={marketing}
+          marketing1={marketing1}
+          marketing2={marketing2}
           goals={goals}
+          goals1={goals1}
+          service={service}
+          framework={framework}
         ></Result>
       )}
     </div>

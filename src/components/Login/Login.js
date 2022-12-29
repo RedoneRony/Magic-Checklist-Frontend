@@ -1,47 +1,40 @@
-import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react'
-import { toast } from 'react-hot-toast';
+import { GoogleAuthProvider } from "firebase/auth";
+import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
-import { useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthProvider';
-import "./Login.css"
+import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
+import "./Login.css";
 
 const Login = () => {
-
   const { providerLogin } = useContext(AuthContext);
-  
-  // dynamic Route Link 
-  const location = useLocation();
-  const from = location.state?.from?.pathname || '/db/home';
-  const navigate = useNavigate()
 
+  // dynamic Route Link
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/db/home";
+  const navigate = useNavigate();
 
   // Provider
   const googleProvider = new GoogleAuthProvider();
 
-
-  // Gmail login 
+  // Gmail login
   const handleProviderLogin = (provider) => {
     providerLogin(provider)
       .then((result) => {
-
         const user = result.user;
         const currentUser = {
-          email: user.email
-        }
+          email: user.email,
+        };
 
-        toast.success('Login Successful ');
+        toast.success("Login Successful ");
         navigate(from, { replace: true });
-
       })
       .catch((error) => {
         const errorMessage = error.message;
         toast.error(errorMessage);
-        console.log(error)
-
+        console.log(error);
       });
-  }
-
+  };
 
   return (
     <div className="rt-login">
@@ -53,11 +46,12 @@ const Login = () => {
             </div>
             <div className="rt-login-box">
               <h3 className="text-start mb-4">Sign In</h3>
-              <button className="rt-outline-btn w-100 text-start" onClick={() => handleProviderLogin(googleProvider)}>
+              <button
+                className="rt-outline-btn w-100 text-start"
+                onClick={() => handleProviderLogin(googleProvider)}
+              >
                 <FaGoogle />
-                <span className="ps-4">
-                  Login with Google
-                </span>
+                <span className="ps-4">Login with Google</span>
               </button>
             </div>
 
@@ -68,7 +62,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
