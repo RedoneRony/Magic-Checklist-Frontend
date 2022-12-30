@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useMemo } from "react";
 import { Col, Row, Form, Button, Spinner } from "react-bootstrap";
 import countryList from "react-select-country-list";
-import { redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Home.css";
 import Result from "../Result/Result";
@@ -10,7 +10,7 @@ const { Configuration, OpenAIApi } = require("openai");
 
 function Home() {
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: process.env.REACT_APP_CHAT_GPT_API_KEY,
   });
 
   const openai = new OpenAIApi(configuration);
@@ -29,7 +29,6 @@ function Home() {
 
   const [isLoading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm();
-
   // country options
   const options = useMemo(() => countryList().getData(), []);
 
@@ -41,7 +40,7 @@ function Home() {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `Write 20 business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency`,
-      max_tokens: 450,
+      max_tokens: 1500,
       temperature: 1,
     });
     setBdData(completion?.data?.choices);
@@ -49,7 +48,7 @@ function Home() {
     const completion2 = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `Here are five types of sales activities that a ${data?.selectedServices?.toString()} agency can do`,
-      max_tokens: 450,
+      max_tokens: 1500,
       temperature: 1,
     });
     setBdData1(completion2?.data?.choices);
@@ -57,7 +56,7 @@ function Home() {
     const completion3 = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `List of 5 market place ${data?.selectedServices?.toString()} agency can find work with link to those website. Do not include Linkedin`,
-      max_tokens: 450,
+      max_tokens: 1500,
       temperature: 1,
     });
     setBdData2(completion3?.data?.choices);
@@ -65,15 +64,15 @@ function Home() {
     const completion4 = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `Write  10 bullet points on how an ${data?.selectedFramework?.toString()} agency can make a marketing plan for their business:`,
-      max_tokens: 450,
+      max_tokens: 1500,
       temperature: 1,
     });
     setMarketing(completion4?.data?.choices);
 
     const completion5 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write  5 bullet points  list  ${data?.selectedFramework?.toString()} agency  where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`,
-      max_tokens: 450,
+      prompt: `Write  5 bullet points  list  ${data?.selectedFramework?.toString()} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`,
+      max_tokens: 1500,
       temperature: 1,
     });
     setMarketing1(completion5?.data?.choices);
@@ -81,7 +80,7 @@ function Home() {
     const completion6 = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `Write me a 6 months Content plan for ${data?.selectedServices?.toString()} Agency writing about ${data?.selectedFramework?.toString()}`,
-      max_tokens: 450,
+      max_tokens: 1500,
       temperature: 1,
     });
     setMarketing2(completion6?.data?.choices);
@@ -89,7 +88,7 @@ function Home() {
     const completion7 = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `3 sample okr for ${data?.agencySize?.toString()} web development agency For Q1 to get more leads and warm leads for ${data?.selectedIndustry?.toString()}`,
-      max_tokens: 450,
+      max_tokens: 1500,
       temperature: 1,
     });
 
@@ -98,7 +97,7 @@ function Home() {
     const completion8 = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `3 sample okr for year 2023 ${data?.selectedServices?.toString()} agency niching industry ${data?.selectedIndustry?.toString()}`,
-      max_tokens: 450,
+      max_tokens: 1500,
       temperature: 1,
     });
     setGoals1(completion8?.data?.choices);

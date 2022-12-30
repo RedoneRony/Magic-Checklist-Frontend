@@ -1,8 +1,8 @@
-import './App.css';
-import { routes } from './routes/Routes';
-import { RouterProvider } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Toaster } from 'react-hot-toast';
+import "./App.css";
+import { routes } from "./routes/Routes";
+import { RouterProvider } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (

@@ -1,6 +1,10 @@
 /* eslint-disable eqeqeq */
-import React, { createRef } from "react";
+import React, { createRef, useContext } from "react";
+import axios from "axios";
 import { Col, Form, Row, Button, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
+
 const ref = createRef();
 
 const Result = ({
@@ -16,9 +20,10 @@ const Result = ({
   service,
   framework,
 }) => {
+  const navigate = useNavigate();
   const resGoal = goals[0]?.text;
   const resGoal1 = goals1[0]?.text;
-
+  const { user } = useContext(AuthContext);
   function formatData(data) {
     const res1 = data[0]?.text;
     const res2 = res1?.replace("\n\n", "\n");
@@ -44,11 +49,48 @@ const Result = ({
   const formatedMarktingData = formatData(marketing);
   const formatedMarktingData1 = formatData(marketing1);
   const formatedMarktingData2 = formatData(marketing2);
-  console.log(formatedMarktingData2);
+
+  const handleSaveToDb = async () => {
+    console.log("first");
+    const response1 = await axios.post(
+      `${process.env.REACT_APP_SITE_API}/api/bd/createBdList`,
+      {
+        email: user?.email,
+        bdCheckList: formatedBdData,
+        salesActivity: formatedBdData1,
+        marketPlace: formatedBdData2,
+      }
+    );
+
+    const response2 = await axios.post(
+      `${process.env.REACT_APP_SITE_API}/api/marketing/createList`,
+      {
+        email: user?.email,
+        marketingCheckList: formatedMarktingData,
+        webDirectories: formatedMarktingData1,
+        contentPlan: formatedMarktingData2,
+      }
+    );
+    const response3 = await axios.post(
+      `${process.env.REACT_APP_SITE_API}/api/okr/createList`,
+      {
+        email: user?.email,
+        okrQ1: resGoal,
+        okrYear: resGoal1,
+      }
+    );
+    // if (
+    //   response1.status === 201 &&
+    //   response2.status === 201 &&
+    //   response3.status === 201
+    // ) {
+    //   navigate("/db/result");
+    // }
+  };
   return (
     <>
       <Row className="justify-content-md-center">
-        <Col md={7}>
+        <Col>
           <Form className="my-3 bg-light pb-3 shadow mb-3 rounded">
             <div ref={ref} style={{ height: "auto" }}>
               <div className="mb-4 p-4">
@@ -258,6 +300,17 @@ const Result = ({
               </div>
             </div>
           </Form>
+          {/* {resGoal &&
+            resGoal1 &&
+            formatedBdData &&
+            formatedBdData1 &&
+            formatedBdData2 &&
+            formatedMarktingData &&
+            formatedMarktingData1 &&
+            formatedMarktingData2 && (
+              <Button onClick={handleSaveToDb}>Save</Button>
+            )}
+          <Button onClick={() => navigate(0)}>Regenerate</Button> */}
         </Col>
       </Row>
     </>

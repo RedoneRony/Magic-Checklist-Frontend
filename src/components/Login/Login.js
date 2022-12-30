@@ -7,8 +7,8 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import "./Login.css";
 
 const Login = () => {
-  const { providerLogin } = useContext(AuthContext);
-
+  const { providerLogin, setLoading } = useContext(AuthContext);
+  const currentYear = new Date().getFullYear();
   // dynamic Route Link
   const location = useLocation();
   const from = location.state?.from?.pathname || "/db/home";
@@ -33,6 +33,9 @@ const Login = () => {
         const errorMessage = error.message;
         toast.error(errorMessage);
         console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -56,7 +59,7 @@ const Login = () => {
             </div>
 
             <footer className="mt-5 text-center text-white">
-              © 2022 reteamnow.
+              &copy; {currentYear} Managed Coder.
             </footer>
           </div>
         </div>
