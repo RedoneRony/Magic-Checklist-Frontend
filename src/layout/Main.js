@@ -13,7 +13,7 @@ export const Main = () => {
 
     return (
         <>
-            <Navbar bg="light">
+            <Navbar bg="light" className='rt-nav'>
                 <Container>
                     <Navbar.Brand >
                         <Link to="/db/home">

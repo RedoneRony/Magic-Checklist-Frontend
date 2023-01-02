@@ -3,5 +3,10 @@
 }
 
 .brand-color {
-    color: #56858e;
+    color: #2A878F !important;
+}
+
+.rt-nav {
+    border-radius: 0px 0px 20px 20px;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.06);
 }
