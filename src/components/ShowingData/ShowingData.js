@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { Tab, Tabs, Col, Row, Nav } from "react-bootstrap";
+import { FaHandshake, FaRegDotCircle, FaRocket } from "react-icons/fa";
+import "./ShowingData.css";
+
 function ShowingData() {
   const { user } = useContext(AuthContext);
   const [bdData, setBdData] = useState([]);
@@ -79,7 +83,7 @@ function ShowingData() {
           },
         })
         .then((response) => {
-          setBdData(response);
+          setBdData(response?.data[0]);
           setBdDataId(response?.data[0]?._id);
         })
         .catch((error) => {
@@ -95,7 +99,7 @@ function ShowingData() {
           },
         })
         .then((response) => {
-          setMData(response);
+          setMData(response?.data[0]);
           setMDataId(response?.data[0]?._id);
         })
         .catch((error) => {
@@ -111,7 +115,7 @@ function ShowingData() {
           },
         })
         .then((response) => {
-          setOkrData(response);
+          setOkrData(response?.data[0]);
           setOkrDataBd(response?.data[0]?._id);
         })
         .catch((error) => {
@@ -119,12 +123,97 @@ function ShowingData() {
         });
     };
     getEmployeeEmails();
-  }, []);
+  }, [!bdData, !mData, !okrData]);
+
+  // console.log("Bd Data", bdData);
+  // console.log("mData", mData);
+  // console.log("okrData", okrData);
 
   return (
-    <div>
-      <button onClick={deleteData}>Delete Data</button>
-    </div>
+    <>
+      <div className="">
+        <Tab.Container defaultActiveKey="businessDevelopment">
+          <Row>
+            <Col sm={12}>
+              <Nav variant="pills">
+                <Nav.Item>
+                  <Nav.Link eventKey="businessDevelopment" className="rt-btn">
+                    <FaHandshake /> Business Development
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="marketing" className="rt-btn">
+                    <FaRocket /> Marketing
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="okr" className="rt-btn">
+                    <FaRegDotCircle /> OKR
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Col>
+            <Col sm={12}>
+              <Tab.Content className="my-4 bg-white rounded-4 shadow p-4">
+                {bdData && mData && okrData ? (
+                  <>
+                    <Tab.Pane eventKey="businessDevelopment">
+                      <h4 className="rt-result-hading brand-color p-4">
+                        bdCheckLis
+                      </h4>
+                      <pre>{bdData?.bdCheckList}</pre>
+                      <h4 className="rt-result-hading brand-color p-4">
+                        marketPlace
+                      </h4>
+                      <pre>{bdData?.bdCheckList}</pre>
+                      <h4 className="rt-result-hading brand-color p-4">
+                        salesActivity
+                      </h4>
+                      <pre>{bdData?.bdCheckList}</pre>
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="marketing">
+                      <h4 className="rt-result-hading brand-color p-4">
+                        contentPlan
+                      </h4>
+                      <pre>{mData?.contentPlan}</pre>
+                      <h4 className="rt-result-hading brand-color p-4">
+                        marketingCheckList
+                      </h4>
+                      <pre>{mData?.marketingCheckList}</pre>
+                      <h4 className="rt-result-hading brand-color p-4">
+                        webDirectories
+                      </h4>
+                      <pre>{mData?.webDirectories}</pre>
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="okr">
+                      <h4 className="rt-result-hading brand-color p-4">
+                        okrQ1
+                      </h4>
+                      <pre>{okrData?.okrQ1}</pre>
+                      <h4 className="rt-result-hading brand-color p-4">
+                        okrYear
+                      </h4>
+                      <pre>{okrData?.okrYear}</pre>
+                    </Tab.Pane>
+                  </>
+                ) : (
+                  <h5>
+                    Please <Link to="/db/home">Generate</Link> your Magic
+                    Checklist First
+                  </h5>
+                )}
+              </Tab.Content>
+            </Col>
+          </Row>
+        </Tab.Container>
+      </div>
+
+      <div className="mb-3">
+        <button onClick={deleteData} className="rt-btn">
+          Delete & Regenerate
+        </button>
+      </div>
+    </>
   );
 }
 

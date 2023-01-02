@@ -1,7 +1,3 @@
-.rt-login {
-  background: linear-gradient(174.76deg, rgba(53, 167, 255, 0.05) 0%, #35A7FF 100%);
-}
-
 .rt-login-box {
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
@@ -20,6 +16,7 @@
   border: 1px solid #FFFFFF;
   border-radius: 20px;
   padding: 15px 25px;
+  font-size: 20px;
 }
 
 .rt-outline-btn .span {

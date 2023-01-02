@@ -27,8 +27,6 @@ const Login = () => {
         currentUser = {
           email: user.email,
         };
-
-        toast.success("Login Successful ");
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -58,6 +56,8 @@ const Login = () => {
         console.log(error);
       })
       .finally(() => {
+        setLoading(false);
+        toast.success("Login Successful ");
         navigate(result === 1 ? "/db/result" : "/db/home");
       });
   };
@@ -70,18 +70,18 @@ const Login = () => {
             <div className="p-5 text-center">
               <img src="/logo.png" alt="logo" className="img-fluid" />
             </div>
-            <div className="rt-login-box">
-              <h3 className="text-start mb-4">Sign In</h3>
+            <div className="rt-login-box mb-5">
+              <h3 className="text-start mb-4 brand-color">Sign In</h3>
               <button
                 className="rt-outline-btn w-100 text-start"
                 onClick={() => handleProviderLogin(googleProvider)}
               >
-                <FaGoogle />
+                <FaGoogle className="brand-color" />
                 <span className="ps-4">Login with Google</span>
               </button>
             </div>
 
-            <footer className="mt-5 text-center text-white">
+            <footer className="mt-5 text-center brand-color">
               &copy; {currentYear} Managed Coder.
             </footer>
           </div>

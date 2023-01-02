@@ -1,14 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useContext } from "react";
 import { Col, Row, Form, Button, Spinner } from "react-bootstrap";
 import countryList from "react-select-country-list";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../contexts/AuthProvider";
+
 import "./Home.css";
 import Result from "../Result/Result";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const { Configuration, OpenAIApi } = require("openai");
 
 function Home() {
+  const { user } = useContext(AuthContext);
   const configuration = new Configuration({
     apiKey: process.env.REACT_APP_CHAT_GPT_API_KEY,
   });
@@ -26,6 +31,7 @@ function Home() {
   const [goals1, setGoals1] = useState([]);
   const [service, setService] = useState("");
   const [framework, setFramework] = useState("");
+  const [dbInfo, setDbInfo] = useState("");
 
   const [isLoading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm();
@@ -155,6 +161,25 @@ function Home() {
     "Other Industries",
   ];
 
+  useEffect(() => {
+    const getEmployeeEmails = async () => {
+      await axios
+        .get(`${process.env.REACT_APP_SITE_API}/api/okr/getAll`, {
+          headers: {
+            "Content-Type": "application/json",
+            email: `${user?.email}`,
+          },
+        })
+        .then((response) => {
+          setDbInfo(response?.data[0]?.email);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getEmployeeEmails();
+  }, []);
+
   return (
     <div className="rt-home mt-5">
       {bdData.length === 0 ? (
@@ -283,6 +308,11 @@ function Home() {
                   role="status"
                   aria-hidden="true"
                 />
+              ) : dbInfo === user?.email ? (
+                <h5>
+                  Please Delete & Regenerate form{" "}
+                  <Link to="/db/result">here</Link>
+                </h5>
               ) : (
                 <Button variant="primary" type="submit">
                   Submit
