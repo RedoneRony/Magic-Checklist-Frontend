@@ -24,18 +24,18 @@ const Result = ({
   const resGoal = goals[0]?.text;
   const resGoal1 = goals1[0]?.text;
   const { user } = useContext(AuthContext);
-  function formatData(data) {
-    const res1 = data[0]?.text;
-    const res2 = res1?.replace("\n\n", "\n");
-    const res3 = res2?.replace(/(\r\n|\n|\r)/gm, "");
-    const res4 = res3?.replace(/[0-9]/g, "");
-    const res5 = res4?.split(".");
-    const resultData = res5?.filter(function (el) {
-      return el != "";
-    });
-
-    return resultData;
-  }
+  // function formatData(data) {
+  // const res1 = data[0]?.text;
+  // const res2 = res1?.replace("\n\n", "\n");
+  // const res3 = res2?.replace(/(\r\n|\n|\r)/gm, "");
+  // const res4 = res3?.replace(/[0-9]/g, "");
+  // const res5 = res4?.split(".");
+  // const resultData = res5?.filter(function (el) {
+  //   return el != "";
+  // });
+  // const formatedIdeas = data[0]?.text.split(/\d+\./);
+  // return formatedIdeas;
+  // }
 
   const formatMarketingData2 = (data) => {
     const res1 = data[0]?.text;
@@ -43,12 +43,12 @@ const Result = ({
     return res2;
   };
 
-  const formatedBdData = formatData(bdData);
-  const formatedBdData1 = formatData(bdData1);
+  //  const formatedBdData = formatData(bdData);
+  //  const formatedBdData1 = formatData(bdData1);
   const formatedBdData2 = formatMarketingData2(bdData2);
-  const formatedMarktingData = formatData(marketing);
-  const formatedMarktingData1 = formatData(marketing1);
-  const formatedMarktingData2 = formatData(marketing2);
+  // const formatedMarktingData = formatData(marketing);
+  // const formatedMarktingData1 = formatData(marketing1);
+  // const formatedMarktingData2 = formatData(marketing2);
 
   const handleSaveToDb = async () => {
     console.log("first");
@@ -56,8 +56,8 @@ const Result = ({
       `${process.env.REACT_APP_SITE_API}/api/bd/createBdList`,
       {
         email: user?.email,
-        bdCheckList: formatedBdData,
-        salesActivity: formatedBdData1,
+        bdCheckList: bdData[0].text,
+        salesActivity: bdData1[0].text,
         marketPlace: formatedBdData2,
       }
     );
@@ -66,9 +66,9 @@ const Result = ({
       `${process.env.REACT_APP_SITE_API}/api/marketing/createList`,
       {
         email: user?.email,
-        marketingCheckList: formatedMarktingData,
-        webDirectories: formatedMarktingData1,
-        contentPlan: formatedMarktingData2,
+        marketingCheckList: marketing[0].text,
+        webDirectories: marketing1[0].text,
+        contentPlan: marketing2[0].text,
       }
     );
     const response3 = await axios.post(
@@ -79,6 +79,7 @@ const Result = ({
         okrYear: resGoal1,
       }
     );
+
     if (
       response1.status === 201 &&
       response2.status === 201 &&
@@ -99,14 +100,13 @@ const Result = ({
                   2023 (As a CEO or Management, I want you to go over this and
                   make sure each are done or have plan for this):
                 </Form.Label>
-                {formatedBdData ? (
-                  formatedBdData?.map((item, index) => (
-                    <Form.Check
-                      key={index}
-                      id={item}
-                      label={item}
-                      value={item}
-                    />
+                {bdData ? (
+                  bdData?.map((item, index) => (
+                    <>
+                      <pre key={index}>{item.text}</pre>
+                      <br></br>
+                      <br></br>
+                    </>
                   ))
                 ) : (
                   <h4>
@@ -126,14 +126,11 @@ const Result = ({
                   5 Type of Sales Activity your {userData?.agencyName} to do to
                   get more Business in 2023:
                 </Form.Label>
-                {formatedBdData1 ? (
-                  formatedBdData1?.map((item, index) => (
-                    <Form.Check
-                      key={index}
-                      id={item}
-                      label={item}
-                      value={item}
-                    />
+                {bdData1 ? (
+                  bdData1?.map((item, index) => (
+                    <>
+                      <pre key={index}>{item.text}</pre>
+                    </>
                   ))
                 ) : (
                   <h4>
@@ -176,14 +173,9 @@ const Result = ({
                 <Form.Label>
                   Marketing Checklist For For {userData?.agencyName} in 2023 :
                 </Form.Label>
-                {formatedMarktingData ? (
-                  formatedMarktingData?.map((item, index) => (
-                    <Form.Check
-                      key={index}
-                      id={item}
-                      label={item}
-                      value={item}
-                    />
+                {marketing ? (
+                  marketing?.map((item, index) => (
+                    <pre key={index}>{item.text}</pre>
                   ))
                 ) : (
                   <h4>
@@ -204,14 +196,9 @@ const Result = ({
                   Here are five web directories where a software agency can list
                   their website, and get client review done:
                 </Form.Label>
-                {formatedMarktingData1 ? (
-                  formatedMarktingData1?.map((item, index) => (
-                    <Form.Check
-                      key={index}
-                      id={item}
-                      label={item}
-                      value={item}
-                    />
+                {marketing1 ? (
+                  marketing1?.map((item, index) => (
+                    <pre key={index}>{item.text}</pre>
                   ))
                 ) : (
                   <h4>
@@ -232,14 +219,9 @@ const Result = ({
                   Here is a suggested 6-month content plan for a {service}
                   agency writing about {framework}:
                 </Form.Label>
-                {formatedMarktingData2 ? (
-                  formatedMarktingData2?.map((item, index) => (
-                    <Form.Check
-                      key={index}
-                      id={item}
-                      label={item}
-                      value={item}
-                    />
+                {marketing2 ? (
+                  marketing2?.map((item, index) => (
+                    <pre key={index}>{item.text}</pre>
                   ))
                 ) : (
                   <h4>
@@ -302,14 +284,12 @@ const Result = ({
           </Form>
           {resGoal &&
             resGoal1 &&
-            formatedBdData &&
-            formatedBdData1 &&
+            bdData &&
+            bdData1 &&
             formatedBdData2 &&
-            formatedMarktingData &&
-            formatedMarktingData1 &&
-            formatedMarktingData2 && (
-              <Button onClick={handleSaveToDb}>Save</Button>
-            )}
+            marketing &&
+            marketing1 &&
+            marketing2 && <Button onClick={handleSaveToDb}>Save</Button>}
           <Button onClick={() => navigate(0)}>Regenerate</Button>
         </Col>
       </Row>

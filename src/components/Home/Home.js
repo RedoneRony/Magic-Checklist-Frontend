@@ -39,7 +39,7 @@ function Home() {
     setLoading(true);
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write 20 business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency`,
+      prompt: `Write 20 bullet points on business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -47,7 +47,7 @@ function Home() {
 
     const completion2 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Here are five bullet points of sales activities that a ${data?.selectedServices?.toString()} agency can do`,
+      prompt: `Here are 5 bullet points of sales activities that a ${data?.selectedServices?.toString()} agency can do`,
       max_tokens: 1500,
       temperature: 1,
     });
