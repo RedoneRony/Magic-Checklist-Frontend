@@ -79,13 +79,13 @@ const Result = ({
         okrYear: resGoal1,
       }
     );
-    // if (
-    //   response1.status === 201 &&
-    //   response2.status === 201 &&
-    //   response3.status === 201
-    // ) {
-    //   navigate("/db/result");
-    // }
+    if (
+      response1.status === 201 &&
+      response2.status === 201 &&
+      response3.status === 201
+    ) {
+      navigate("/db/result");
+    }
   };
   return (
     <>
@@ -300,7 +300,7 @@ const Result = ({
               </div>
             </div>
           </Form>
-          {/* {resGoal &&
+          {resGoal &&
             resGoal1 &&
             formatedBdData &&
             formatedBdData1 &&
@@ -310,7 +310,7 @@ const Result = ({
             formatedMarktingData2 && (
               <Button onClick={handleSaveToDb}>Save</Button>
             )}
-          <Button onClick={() => navigate(0)}>Regenerate</Button> */}
+          <Button onClick={() => navigate(0)}>Regenerate</Button>
         </Col>
       </Row>
     </>

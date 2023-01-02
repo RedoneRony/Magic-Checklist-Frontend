@@ -1,18 +1,20 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext } from "react";
+import axios from "axios";
 import { toast } from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import "./Login.css";
 
 const Login = () => {
   const { providerLogin, setLoading } = useContext(AuthContext);
   const currentYear = new Date().getFullYear();
-  // dynamic Route Link
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/db/home";
+
   const navigate = useNavigate();
+
+  let currentUser = "";
+  let result = "";
 
   // Provider
   const googleProvider = new GoogleAuthProvider();
@@ -22,12 +24,11 @@ const Login = () => {
     providerLogin(provider)
       .then((result) => {
         const user = result.user;
-        const currentUser = {
+        currentUser = {
           email: user.email,
         };
 
         toast.success("Login Successful ");
-        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -36,6 +37,28 @@ const Login = () => {
       })
       .finally(() => {
         setLoading(false);
+        getEmployeeEmails(currentUser.email);
+      });
+  };
+
+  // check db data
+
+  const getEmployeeEmails = async (value) => {
+    await axios
+      .get(`${process.env.REACT_APP_SITE_API}/api/okr/getAll`, {
+        headers: {
+          "Content-Type": "application/json",
+          email: `${value}`,
+        },
+      })
+      .then((response) => {
+        result = response.data.length;
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        navigate(result === 1 ? "/db/result" : "/db/home");
       });
   };
 

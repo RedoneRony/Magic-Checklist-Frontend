@@ -47,7 +47,7 @@ function Home() {
 
     const completion2 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Here are five types of sales activities that a ${data?.selectedServices?.toString()} agency can do`,
+      prompt: `Here are five bullet points of sales activities that a ${data?.selectedServices?.toString()} agency can do`,
       max_tokens: 1500,
       temperature: 1,
     });
