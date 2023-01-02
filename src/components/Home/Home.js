@@ -134,6 +134,7 @@ function Home() {
     "Magento",
     "Shopify",
     "Squarespace",
+    "GoHighLevel",
   ];
 
   const industry = [
