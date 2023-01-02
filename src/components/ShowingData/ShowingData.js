@@ -159,39 +159,44 @@ function ShowingData() {
                   <>
                     <Tab.Pane eventKey="businessDevelopment">
                       <h4 className="rt-result-hading brand-color p-4">
-                        bdCheckLis
+                        Business development Checklist For Your Agency in 2023
+                        (As a CEO or Management, I want you to go over this and
+                        make sure each are done or have plan for this):
                       </h4>
                       <pre>{bdData?.bdCheckList}</pre>
                       <h4 className="rt-result-hading brand-color p-4">
-                        marketPlace
+                        5 Type of Sales Activities to do for getting more
+                        Business in 2023:
                       </h4>
                       <pre>{bdData?.bdCheckList}</pre>
                       <h4 className="rt-result-hading brand-color p-4">
-                        salesActivity
+                        Here are five marketplaces your agency can find work:
                       </h4>
                       <pre>{bdData?.bdCheckList}</pre>
                     </Tab.Pane>
                     <Tab.Pane eventKey="marketing">
                       <h4 className="rt-result-hading brand-color p-4">
-                        contentPlan
+                        Marketing Checklist For Your Agency for 2023:
                       </h4>
                       <pre>{mData?.contentPlan}</pre>
                       <h4 className="rt-result-hading brand-color p-4">
-                        marketingCheckList
+                        Here are five web directories where your agency can list
+                        your website, and get client review done:
                       </h4>
                       <pre>{mData?.marketingCheckList}</pre>
                       <h4 className="rt-result-hading brand-color p-4">
-                        webDirectories
+                        Here is a 6-month content plan for showcasing your
+                        Agency's framework based technical expertise:
                       </h4>
                       <pre>{mData?.webDirectories}</pre>
                     </Tab.Pane>
                     <Tab.Pane eventKey="okr">
                       <h4 className="rt-result-hading brand-color p-4">
-                        okrQ1
+                        Goals and Objective for your Team in Q1 2023:
                       </h4>
                       <pre>{okrData?.okrQ1}</pre>
                       <h4 className="rt-result-hading brand-color p-4">
-                        okrYear
+                        Goals and Objective for your Team in Year 2023:
                       </h4>
                       <pre>{okrData?.okrYear}</pre>
                     </Tab.Pane>
