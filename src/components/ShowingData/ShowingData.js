@@ -131,7 +131,7 @@ function ShowingData() {
 
   return (
     <>
-      <div className="">
+      <div className="mt-4">
         <Tab.Container defaultActiveKey="businessDevelopment">
           <Row>
             <Col sm={12}>
