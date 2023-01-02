@@ -91,207 +91,217 @@ const Result = ({
   return (
     <>
       <Row className="justify-content-md-center">
-        <Col>
-          <Form className="my-3 bg-light pb-3 shadow mb-3 rounded">
-            <div ref={ref} style={{ height: "auto" }}>
-              <div className="mb-4 p-4">
-                <Form.Label>
-                  Business development Checklist For {userData?.agencyName} in
-                  2023 (As a CEO or Management, I want you to go over this and
-                  make sure each are done or have plan for this):
-                </Form.Label>
-                {bdData ? (
-                  bdData?.map((item, index) => (
-                    <>
-                      <pre key={index}>{item.text}</pre>
-                      <br></br>
-                      <br></br>
-                    </>
-                  ))
-                ) : (
-                  <h4>
-                    Calculating...
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                  </h4>
-                )}
-              </div>
-              <div className="mb-4 p-4">
-                <Form.Label>
-                  5 Type of Sales Activity your {userData?.agencyName} to do to
-                  get more Business in 2023:
-                </Form.Label>
-                {bdData1 ? (
-                  bdData1?.map((item, index) => (
-                    <>
-                      <pre key={index}>{item.text}</pre>
-                    </>
-                  ))
-                ) : (
-                  <h4>
-                    Calculating...
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                  </h4>
-                )}
-              </div>
+        <div className="my-4 bg-white rounded-4 shadow p-4">
+          <Row>
 
-              <div className="mb-4 p-4">
-                <Form.Label>
-                  Here are five marketplaces where a {service} agency can find
-                  work:
-                </Form.Label>
-                <pre>
-                  {formatedBdData2 ? (
-                    formatedBdData2
-                  ) : (
-                    <h4>
-                      Calculating...
-                      <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                      />
-                    </h4>
-                  )}
-                </pre>
-              </div>
 
-              <div className="mb-4 p-4">
-                <Form.Label>
-                  Marketing Checklist For For {userData?.agencyName} in 2023 :
-                </Form.Label>
-                {marketing ? (
-                  marketing?.map((item, index) => (
-                    <pre key={index}>{item.text}</pre>
-                  ))
-                ) : (
-                  <h4>
-                    Calculating...
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                  </h4>
-                )}
-              </div>
+            <Col>
+              <Form >
+                <div ref={ref} style={{ height: "auto" }}>
+                  <div className="mb-4 p-4">
+                    <Form.Label>
+                      Business development Checklist For {userData?.agencyName} in
+                      2023 (As a CEO or Management, I want you to go over this and
+                      make sure each are done or have plan for this):
+                    </Form.Label>
+                    {bdData ? (
+                      bdData?.map((item, index) => (
+                        <>
+                          <pre key={index}>{item.text}</pre>
+                          <br></br>
+                          <br></br>
+                        </>
+                      ))
+                    ) : (
+                      <h4>
+                        Calculating...
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                      </h4>
+                    )}
+                  </div>
+                  <div className="mb-4 p-4">
+                    <Form.Label>
+                      5 Type of Sales Activity your {userData?.agencyName} to do to
+                      get more Business in 2023:
+                    </Form.Label>
+                    {bdData1 ? (
+                      bdData1?.map((item, index) => (
+                        <>
+                          <pre key={index}>{item.text}</pre>
+                        </>
+                      ))
+                    ) : (
+                      <h4>
+                        Calculating...
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                      </h4>
+                    )}
+                  </div>
 
-              <div className="mb-4 p-4">
-                <Form.Label>
-                  Here are five web directories where a software agency can list
-                  their website, and get client review done:
-                </Form.Label>
-                {marketing1 ? (
-                  marketing1?.map((item, index) => (
-                    <pre key={index}>{item.text}</pre>
-                  ))
-                ) : (
-                  <h4>
-                    Calculating...
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                  </h4>
-                )}
-              </div>
+                  <div className="mb-4 p-4">
+                    <Form.Label>
+                      Here are five marketplaces where a {service} agency can find
+                      work:
+                    </Form.Label>
+                    <pre>
+                      {formatedBdData2 ? (
+                        formatedBdData2
+                      ) : (
+                        <h4>
+                          Calculating...
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                        </h4>
+                      )}
+                    </pre>
+                  </div>
 
-              <div className="mb-4 p-4">
-                <Form.Label>
-                  Here is a suggested 6-month content plan for a {service}
-                  agency writing about {framework}:
-                </Form.Label>
-                {marketing2 ? (
-                  marketing2?.map((item, index) => (
-                    <pre key={index}>{item.text}</pre>
-                  ))
-                ) : (
-                  <h4>
-                    Calculating...
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                  </h4>
-                )}
-              </div>
+                  <div className="mb-4 p-4">
+                    <Form.Label>
+                      Marketing Checklist For For {userData?.agencyName} in 2023 :
+                    </Form.Label>
+                    {marketing ? (
+                      marketing?.map((item, index) => (
+                        <pre key={index}>{item.text}</pre>
+                      ))
+                    ) : (
+                      <h4>
+                        Calculating...
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                      </h4>
+                    )}
+                  </div>
 
-              <div className="mb-4 p-4">
-                <Form.Label>
-                  Goals and Objective for your Team in Q1 2023:
-                </Form.Label>
-                <pre>
-                  {resGoal ? (
-                    resGoal
-                  ) : (
-                    <h4>
-                      Calculating...
-                      <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                      />
-                    </h4>
-                  )}
-                </pre>
-              </div>
+                  <div className="mb-4 p-4">
+                    <Form.Label>
+                      Here are five web directories where a software agency can list
+                      their website, and get client review done:
+                    </Form.Label>
+                    {marketing1 ? (
+                      marketing1?.map((item, index) => (
+                        <pre key={index}>{item.text}</pre>
+                      ))
+                    ) : (
+                      <h4>
+                        Calculating...
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                      </h4>
+                    )}
+                  </div>
 
-              <div className="mb-4 p-4">
-                <Form.Label>
-                  Goals and Objective for your Team in 2023:
-                </Form.Label>
-                <pre>
-                  {resGoal1 ? (
-                    resGoal1
-                  ) : (
-                    <h4>
-                      Calculating...
-                      <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                      />
-                    </h4>
-                  )}
-                </pre>
-              </div>
-            </div>
-          </Form>
-          {resGoal &&
-            resGoal1 &&
-            bdData &&
-            bdData1 &&
-            formatedBdData2 &&
-            marketing &&
-            marketing1 &&
-            marketing2 && <Button onClick={handleSaveToDb}>Save</Button>}
-          <Button onClick={() => navigate(0)}>Regenerate</Button>
-        </Col>
+                  <div className="mb-4 p-4">
+                    <Form.Label>
+                      Here is a suggested 6-month content plan for a {service}
+                      agency writing about {framework}:
+                    </Form.Label>
+                    {marketing2 ? (
+                      marketing2?.map((item, index) => (
+                        <pre key={index}>{item.text}</pre>
+                      ))
+                    ) : (
+                      <h4>
+                        Calculating...
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                      </h4>
+                    )}
+                  </div>
+
+                  <div className="mb-4 p-4">
+                    <Form.Label>
+                      Goals and Objective for your Team in Q1 2023:
+                    </Form.Label>
+                    <pre>
+                      {resGoal ? (
+                        resGoal
+                      ) : (
+                        <h4>
+                          Calculating...
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                        </h4>
+                      )}
+                    </pre>
+                  </div>
+
+                  <div className="mb-4 p-4">
+                    <Form.Label>
+                      Goals and Objective for your Team in 2023:
+                    </Form.Label>
+                    <pre>
+                      {resGoal1 ? (
+                        resGoal1
+                      ) : (
+                        <h4>
+                          Calculating...
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                        </h4>
+                      )}
+                    </pre>
+                  </div>
+                </div>
+              </Form>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              {resGoal &&
+                resGoal1 &&
+                bdData &&
+                bdData1 &&
+                formatedBdData2 &&
+                marketing &&
+                marketing1 &&
+                marketing2 && <Button onClick={handleSaveToDb}  className="rt-btn-on mr-3">Save</Button>}
+              <Button onClick={() => navigate(0)}  className="rt-btn">Regenerate</Button>
+            </Col>
+          </Row>
+        </div>
       </Row>
     </>
   );

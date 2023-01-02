@@ -186,13 +186,18 @@ function Home() {
       {bdData.length === 0 ? (
         <Row className="justify-content-md-center">
           <Col md="auto">
-            <h3>Please fill up the below information to proceed:</h3>
 
             <Form
-              className="mt-3 bg-light p-4 shadow mb-3 rounded"
+              className="my-4 bg-white rounded-4 shadow p-4"
               onSubmit={handleSubmit(onSubmit)}
             >
               <Row>
+                <Col>
+                  <h4 className="brand-color mb-4"><small>Welcome To Magic Checklist!</small><br /> Get started with Magic Checklist by filling out the form below</h4>
+                </Col>
+              </Row>
+              <Row>
+
                 <Col>
                   <Form.Group
                     className="mb-4"
@@ -202,7 +207,7 @@ function Home() {
                     <Form.Control
                       {...register("agencyName", { required: true })}
                       type="text"
-                      placeholder="xyz co"
+                      placeholder="Your agency name"
                     />
                   </Form.Group>
                 </Col>
@@ -216,7 +221,7 @@ function Home() {
                       aria-label="Default select example"
                       {...register("agencySize", { required: true })}
                     >
-                      <option>Select your Agency Size</option>
+                      <option>Select your agency size</option>
                       <option value="small">(1-10)</option>
                       <option value="small">(11-20)</option>
                       <option value="medium">(21-50)</option>
@@ -224,9 +229,6 @@ function Home() {
                     </Form.Select>
                   </Form.Group>
                 </Col>
-              </Row>
-
-              <Row>
                 <Col>
                   <Form.Group
                     className="mb-4"
@@ -237,7 +239,7 @@ function Home() {
                       aria-label="Default select example"
                       {...register("agencyLocation", { required: true })}
                     >
-                      <option disabled>Select your Location</option>
+                      <option >Select your Location</option>
                       {options.map((x) => (
                         <option key={x.value}>{x.label}</option>
                       ))}
@@ -245,6 +247,8 @@ function Home() {
                   </Form.Group>
                 </Col>
               </Row>
+
+
 
               <Row>
                 <Col>
@@ -300,25 +304,28 @@ function Home() {
                   />
                 ))}
               </div>
+              <div className="d-flex justify-content-center">
+                {isLoading ? (
 
-              {isLoading ? (
-                <Spinner
-                  as="span"
-                  animation="border"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                />
-              ) : dbInfo === user?.email ? (
-                <h5>
-                  Please Delete & Regenerate form{" "}
-                  <Link to="/db/result">here</Link>
-                </h5>
-              ) : (
-                <Button variant="primary" type="submit">
-                  Submit
-                </Button>
-              )}
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                ) : dbInfo === user?.email ? (
+                  <h5>
+                    Please Delete & Regenerate form{" "}
+                    <Link to="/db/result">here</Link>
+                  </h5>
+                ) : (
+
+                  <Button type="submit" className="rt-btn-on">
+                    Submit
+                  </Button>
+                )}
+              </div>
             </Form>
           </Col>
         </Row>
