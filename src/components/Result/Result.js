@@ -24,7 +24,7 @@ const Result = ({
   const resGoal = goals[0]?.text;
   const resGoal1 = goals1[0]?.text;
   const { user } = useContext(AuthContext);
-  // function formatData(data) {
+  function formatData(data) {
   // const res1 = data[0]?.text;
   // const res2 = res1?.replace("\n\n", "\n");
   // const res3 = res2?.replace(/(\r\n|\n|\r)/gm, "");
@@ -33,25 +33,34 @@ const Result = ({
   // const resultData = res5?.filter(function (el) {
   //   return el != "";
   // });
-  // const formatedIdeas = data[0]?.text.split(/\d+\./);
-  // return formatedIdeas;
-  // }
+  const formatedIdeas = data[0]?.text.split(/\d+\./);
+  return formatedIdeas;
+  }
 
   const formatMarketingData2 = (data) => {
     const res1 = data[0]?.text;
-    const res2 = res1?.replace("\n\n", "\n");
-    return res2;
+    // const res2 = res1?.replace("\n\n", "\n");
+    const formatedIdeas = res1?.split("\n");
+    const array = []
+    const test = formatedIdeas?.map((item) => {
+        if(item !== ''){
+          array.push(item)
+        }
+});
+    return array;
   };
 
-  //  const formatedBdData = formatData(bdData);
-  //  const formatedBdData1 = formatData(bdData1);
+  const formatedBdData = bdData[0]?.text.split(/\d+\./);
+  const formatedBdData1 = bdData1[0]?.text.split(/\d+\./);
+  const formatedMarketing = formatData(marketing);
+  const formatedMarketing1 = marketing1[0]?.text.split(/\d+\./);
   const formatedBdData2 = formatMarketingData2(bdData2);
   // const formatedMarktingData = formatData(marketing);
   // const formatedMarktingData1 = formatData(marketing1);
   // const formatedMarktingData2 = formatData(marketing2);
 
+
   const handleSaveToDb = async () => {
-    console.log("first");
     const response1 = await axios.post(
       `${process.env.REACT_APP_SITE_API}/api/bd/createBdList`,
       {
@@ -88,28 +97,25 @@ const Result = ({
       navigate("/db/result");
     }
   };
+
+  
   return (
     <>
       <Row className="justify-content-md-center">
         <div className="my-4 bg-white rounded-4 shadow p-4">
           <Row>
-
-
             <Col>
               <Form >
                 <div ref={ref} style={{ height: "auto" }}>
                   <div className="mb-4 p-4">
                     <Form.Label>
                       Business development Checklist For {userData?.agencyName} in
-                      2023 (As a CEO or Management, I want you to go over this and
-                      make sure each are done or have plan for this):
+                      2023:
                     </Form.Label>
-                    {bdData ? (
-                      bdData?.map((item, index) => (
+                    {formatedBdData ? (
+                      formatedBdData?.slice(1,21).map((item, index) => (
                         <>
-                          <pre key={index}>{item.text}</pre>
-                          <br></br>
-                          <br></br>
+                          <p key={index}>{index+1}.{item}</p>
                         </>
                       ))
                     ) : (
@@ -127,13 +133,13 @@ const Result = ({
                   </div>
                   <div className="mb-4 p-4">
                     <Form.Label>
-                      5 Type of Sales Activity your {userData?.agencyName} to do to
+                      5 Type of Sales Activity{userData?.agencyName} to do to
                       get more Business in 2023:
                     </Form.Label>
-                    {bdData1 ? (
-                      bdData1?.map((item, index) => (
+                    {formatedBdData1 ? (
+                      formatedBdData1?.slice(1,6).map((item, index) => (
                         <>
-                          <pre key={index}>{item.text}</pre>
+                          <p key={index}>{index+1}.{item}</p>
                         </>
                       ))
                     ) : (
@@ -152,34 +158,37 @@ const Result = ({
 
                   <div className="mb-4 p-4">
                     <Form.Label>
-                      Here are five marketplaces where a {service} agency can find
-                      work:
+                    Here are five marketplaces where  {service} agency can find work
                     </Form.Label>
-                    <pre>
-                      {formatedBdData2 ? (
-                        formatedBdData2
-                      ) : (
-                        <h4>
-                          Calculating...
-                          <Spinner
-                            as="span"
-                            animation="border"
-                            size="sm"
-                            role="status"
-                            aria-hidden="true"
-                          />
-                        </h4>
-                      )}
-                    </pre>
+                    {formatedBdData2 ? (
+                      formatedBdData2?.map((item, index) => (
+                        <>
+                          <p key={index}>{item}</p>
+                        </>
+                      ))
+                    ) : (
+                      <h4>
+                        Calculating...
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                      </h4>
+                    )}
                   </div>
+
+                 
 
                   <div className="mb-4 p-4">
                     <Form.Label>
                       Marketing Checklist For For {userData?.agencyName} in 2023 :
                     </Form.Label>
-                    {marketing ? (
-                      marketing?.map((item, index) => (
-                        <pre key={index}>{item.text}</pre>
+                    {formatedMarketing ? (
+                      formatedMarketing?.slice(1,11).map((item, index) => (
+                        <p key={index}> {index+1}.{item}</p>
                       ))
                     ) : (
                       <h4>
@@ -200,9 +209,9 @@ const Result = ({
                       Here are five web directories where a software agency can list
                       their website, and get client review done:
                     </Form.Label>
-                    {marketing1 ? (
-                      marketing1?.map((item, index) => (
-                        <pre key={index}>{item.text}</pre>
+                    {formatedMarketing1 ? (
+                      formatedMarketing1?.slice(1,6)?.map((item, index) => (
+                        <p key={index}>{index +1}.{item}</p>
                       ))
                     ) : (
                       <h4>

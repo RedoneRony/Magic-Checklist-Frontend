@@ -45,7 +45,7 @@ function Home() {
     setLoading(true);
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write 20 bullet points on business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency`,
+      prompt: `Write 21 points on business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -53,7 +53,7 @@ function Home() {
 
     const completion2 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Here are 5 bullet points of sales activities that a ${data?.selectedServices?.toString()} agency can do`,
+      prompt: `Write 6 types of sales activities that a ${data?.selectedServices?.toString()} agency can do`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -69,7 +69,7 @@ function Home() {
 
     const completion4 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write  10 bullet points on how an ${data?.selectedFramework?.toString()} agency can make a marketing plan for their business:`,
+      prompt: `Write  11 points on how an ${data?.selectedFramework?.toString()} agency can make a marketing plan for their business:`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -77,7 +77,7 @@ function Home() {
 
     const completion5 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write  5 bullet points  list  ${data?.selectedFramework?.toString()} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`,
+      prompt: `Write  6  points ${data?.selectedFramework?.toString()} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`,
       max_tokens: 1500,
       temperature: 1,
     });

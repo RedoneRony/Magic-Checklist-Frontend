@@ -2,22 +2,24 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
-import { Tab, Tabs, Col, Row, Nav } from "react-bootstrap";
+import { Tab, Tabs, Col, Row, Nav, Spinner } from "react-bootstrap";
 import { FaHandshake, FaRegDotCircle, FaRocket } from "react-icons/fa";
 import "./ShowingData.css";
 
 function ShowingData() {
   const { user } = useContext(AuthContext);
   const [bdData, setBdData] = useState([]);
+  const [salesActivity, setSalesActivity] = useState([]);
+  const [marketPlace, setMarketPlace] = useState([]);
+  const [webDirectories, setWebDirectories] = useState([]);
+  const [contentPlan, setContentPlan] = useState([]);
+  
   const [bdDataId, setBdDataId] = useState("");
   const [mData, setMData] = useState([]);
   const [mDataId, setMDataId] = useState("");
   const [okrData, setOkrData] = useState([]);
   const [okrDataId, setOkrDataBd] = useState("");
   const navigate = useNavigate();
-  console.log("Bd Data", bdData);
-  console.log("mData", mData);
-  console.log("okrData", okrData);
 
   let response1 = "";
   let response2 = "";
@@ -72,6 +74,19 @@ function ShowingData() {
     }
   };
 
+  function formatData(data) {
+    // const res1 = data[0];
+    // const res2 = res1?.replace("\n\n", "\n");
+    const formatedIdeas = data[0]?.split("\n");
+    const array = []
+    const test = formatedIdeas?.map((item) => {
+      if (item !== '') {
+        array.push(item)
+      }
+    });
+    return array;
+  }
+
   useEffect(() => {
     const getEmployeeEmails = async () => {
       // business data
@@ -83,8 +98,16 @@ function ShowingData() {
           },
         })
         .then((response) => {
-          setBdData(response?.data[0]);
-          setBdDataId(response?.data[0]?._id);
+          const bdData = formatData(response?.data[0]?.bdCheckList)
+          const salesData = formatData(response?.data[0]?.salesActivity)
+          const marketPlaceData = formatData(response?.data[0]?.marketPlace)
+          if (bdData) {
+            setBdData(bdData);
+            setSalesActivity(salesData);
+            setMarketPlace(response?.data[0]?.marketPlace);
+            setBdDataId(response?.data[0]?._id);
+          }
+
         })
         .catch((error) => {
           console.log(error);
@@ -99,7 +122,11 @@ function ShowingData() {
           },
         })
         .then((response) => {
-          setMData(response?.data[0]);
+          const salesData = formatData(response?.data[0]?.marketingCheckList)
+          const webDirectories = formatData(response?.data[0]?.webDirectories)
+          setMData(salesData);
+          setContentPlan(response?.data[0])
+          setWebDirectories(webDirectories)
           setMDataId(response?.data[0]?._id);
         })
         .catch((error) => {
@@ -125,9 +152,7 @@ function ShowingData() {
     getEmployeeEmails();
   }, [!bdData, !mData, !okrData]);
 
-  // console.log("Bd Data", bdData);
-  // console.log("mData", mData);
-  // console.log("okrData", okrData);
+  console.log(marketPlace);
 
   return (
     <>
@@ -159,36 +184,130 @@ function ShowingData() {
                   <>
                     <Tab.Pane eventKey="businessDevelopment">
                       <h4 className="rt-result-hading brand-color p-4">
-                        Business development Checklist For Your Agency in 2023
-                        (As a CEO or Management, I want you to go over this and
-                        make sure each are done or have plan for this):
+                        Business development Checklist For Your Agency in 2023:
                       </h4>
-                      <pre>{bdData?.bdCheckList}</pre>
+                      <div className="mb-4 p-4">
+                        {bdData ? (
+                          bdData?.slice(0, 20).map((item, index) => (
+                            <>
+                              <p key={index}>{item}</p>
+                            </>
+                          ))
+                        ) : (
+                          <h4>
+                            Calculating...
+                            <Spinner
+                              as="span"
+                              animation="border"
+                              size="sm"
+                              role="status"
+                              aria-hidden="true"
+                            />
+                          </h4>
+                        )}
+                      </div>
                       <h4 className="rt-result-hading brand-color p-4">
                         5 Type of Sales Activities to do for getting more
                         Business in 2023:
                       </h4>
-                      <pre>{bdData?.bdCheckList}</pre>
+                      <div className="mb-4 p-4">
+                        {salesActivity ? (
+                          salesActivity?.slice(0,5).map((item, index) => (
+                            <>
+                              <p key={index}>{item}</p>
+                            </>
+                          ))
+                        ) : (
+                          <h4>
+                            Calculating...
+                            <Spinner
+                              as="span"
+                              animation="border"
+                              size="sm"
+                              role="status"
+                              aria-hidden="true"
+                            />
+                          </h4>
+                        )}
+                      </div>
                       <h4 className="rt-result-hading brand-color p-4">
                         Here are five marketplaces your agency can find work:
                       </h4>
-                      <pre>{bdData?.bdCheckList}</pre>
+                      <div className="mb-4 p-4">
+                        {marketPlace ? (
+                          marketPlace?.map((item, index) => (
+                            <>
+                              <p key={index}>{item}</p>
+                            </>
+                          ))
+                        ) : (
+                          <h4>
+                            Calculating...
+                            <Spinner
+                              as="span"
+                              animation="border"
+                              size="sm"
+                              role="status"
+                              aria-hidden="true"
+                            />
+                          </h4>
+                        )}
+                      </div>
                     </Tab.Pane>
                     <Tab.Pane eventKey="marketing">
                       <h4 className="rt-result-hading brand-color p-4">
                         Marketing Checklist For Your Agency for 2023:
                       </h4>
-                      <pre>{mData?.contentPlan}</pre>
+                      <div className="mb-4 p-4">
+                        {mData ? (
+                          mData?.map((item, index) => (
+                            <>
+                              <p key={index}>{item}</p>
+                            </>
+                          ))
+                        ) : (
+                          <h4>
+                            Calculating...
+                            <Spinner
+                              as="span"
+                              animation="border"
+                              size="sm"
+                              role="status"
+                              aria-hidden="true"
+                            />
+                          </h4>
+                        )}
+                      </div>
                       <h4 className="rt-result-hading brand-color p-4">
                         Here are five web directories where your agency can list
                         your website, and get client review done:
                       </h4>
-                      <pre>{mData?.marketingCheckList}</pre>
+                      <div className="mb-4 p-4">
+                        {webDirectories ? (
+                          webDirectories?.map((item, index) => (
+                            <>
+                              <p key={index}>{item}</p>
+                            </>
+                          ))
+                        ) : (
+                          <h4>
+                            Calculating...
+                            <Spinner
+                              as="span"
+                              animation="border"
+                              size="sm"
+                              role="status"
+                              aria-hidden="true"
+                            />
+                          </h4>
+                        )}
+                      </div>
+                       
                       <h4 className="rt-result-hading brand-color p-4">
                         Here is a 6-month content plan for showcasing your
                         Agency's framework based technical expertise:
                       </h4>
-                      <pre>{mData?.webDirectories}</pre>
+                      <pre>{contentPlan?.contentPlan}</pre>
                     </Tab.Pane>
                     <Tab.Pane eventKey="okr">
                       <h4 className="rt-result-hading brand-color p-4">
