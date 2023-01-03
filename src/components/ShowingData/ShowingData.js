@@ -2,21 +2,23 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
-import { Tab, Tabs, Col, Row, Nav, Spinner } from "react-bootstrap";
+import { Tab, Tabs, Col, Row, Nav, Spinner, Button } from "react-bootstrap";
 import { FaHandshake, FaRegDotCircle, FaRocket } from "react-icons/fa";
 import "./ShowingData.css";
 
 function ShowingData() {
   const { user } = useContext(AuthContext);
-  const [bdData, setBdData] = useState([]);
   const [salesActivity, setSalesActivity] = useState([]);
   const [marketPlace, setMarketPlace] = useState([]);
   const [webDirectories, setWebDirectories] = useState([]);
   const [contentPlan, setContentPlan] = useState([]);
   
+  const [bdData, setBdData] = useState([]);
   const [bdDataId, setBdDataId] = useState("");
+
   const [mData, setMData] = useState([]);
   const [mDataId, setMDataId] = useState("");
+
   const [okrData, setOkrData] = useState([]);
   const [okrDataId, setOkrDataBd] = useState("");
   const navigate = useNavigate();
@@ -36,6 +38,7 @@ function ShowingData() {
       })
       .then((response) => {
         response1 = response.status;
+        setBdData([])
       })
       .catch((error) => {
         console.log(error);
@@ -50,6 +53,7 @@ function ShowingData() {
       })
       .then((response) => {
         response2 = response.status;
+        setMData([])
       })
       .catch((error) => {
         console.log(error);
@@ -64,6 +68,7 @@ function ShowingData() {
       })
       .then((response) => {
         response3 = response.status;
+        setOkrData([])
       })
       .catch((error) => {
         console.log(error);
@@ -156,10 +161,10 @@ function ShowingData() {
 
   return (
     <>
-      <div className="mt-4">
+      <div className="mt-4 rt-showing-data">
         <Tab.Container defaultActiveKey="businessDevelopment">
           <Row>
-            <Col sm={12}>
+            <Col sm={10}>
               <Nav variant="pills">
                 <Nav.Item>
                   <Nav.Link eventKey="businessDevelopment" className="rt-btn">
@@ -177,6 +182,13 @@ function ShowingData() {
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
+            </Col>
+            <Col>
+              <div className="mb-3">
+                <Button onClick={deleteData} className="rt-btn">
+                  Delete & Regenerate
+                </Button>
+              </div>
             </Col>
             <Col sm={12}>
               <Tab.Content className="my-4 bg-white rounded-4 shadow p-4">
@@ -332,11 +344,7 @@ function ShowingData() {
         </Tab.Container>
       </div>
 
-      <div className="mb-3">
-        <button onClick={deleteData} className="rt-btn">
-          Delete & Regenerate
-        </button>
-      </div>
+
     </>
   );
 }

@@ -158,9 +158,9 @@ const Result = ({
 
                   <div className="mb-4 p-4">
                     <Form.Label>
-                    Here are five marketplaces where  {service} agency can find work
+                    Here are five marketplaces where  {service} agency can find work:
                     </Form.Label>
-                    {formatedBdData2 ? (
+                    {formatedBdData2.length ? (
                       formatedBdData2?.map((item, index) => (
                         <>
                           <p key={index}>{item}</p>
@@ -232,7 +232,7 @@ const Result = ({
                       Here is a suggested 6-month content plan for a {service}
                       agency writing about {framework}:
                     </Form.Label>
-                    {marketing2 ? (
+                    {marketing2.length ? (
                       marketing2?.map((item, index) => (
                         <pre key={index}>{item.text}</pre>
                       ))
