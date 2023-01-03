@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
-import { Tab, Tabs, Col, Row, Nav } from "react-bootstrap";
+import { Tab, Tabs, Col, Row, Nav, Button } from "react-bootstrap";
 import { FaHandshake, FaRegDotCircle, FaRocket } from "react-icons/fa";
 import "./ShowingData.css";
 
@@ -134,7 +134,7 @@ function ShowingData() {
       <div className="mt-4">
         <Tab.Container defaultActiveKey="businessDevelopment">
           <Row>
-            <Col sm={12}>
+            <Col sm={10}>
               <Nav variant="pills">
                 <Nav.Item>
                   <Nav.Link eventKey="businessDevelopment" className="rt-btn">
@@ -152,6 +152,13 @@ function ShowingData() {
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
+            </Col>
+            <Col>
+              <div className="mb-3">
+                <Button onClick={deleteData} className="rt-btn">
+                  Delete & Regenerate
+                </Button>
+              </div>
             </Col>
             <Col sm={12}>
               <Tab.Content className="my-4 bg-white rounded-4 shadow p-4">
@@ -213,11 +220,7 @@ function ShowingData() {
         </Tab.Container>
       </div>
 
-      <div className="mb-3">
-        <button onClick={deleteData} className="rt-btn">
-          Delete & Regenerate
-        </button>
-      </div>
+
     </>
   );
 }
