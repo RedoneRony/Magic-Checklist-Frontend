@@ -101,7 +101,7 @@ const Result = ({
   
   return (
     <>
-      <Row className="justify-content-md-center">
+      <Row className="justify-content-md-center rt-result">
         <div className="my-4 bg-white rounded-4 shadow p-4">
           <Row>
             <Col>
@@ -133,7 +133,7 @@ const Result = ({
                   </div>
                   <div className="mb-4 p-4">
                     <Form.Label>
-                      5 Type of Sales Activity{userData?.agencyName} to do to
+                      5 Type of Sales Activity {userData?.agencyName} to do to
                       get more Business in 2023:
                     </Form.Label>
                     {formatedBdData1 ? (

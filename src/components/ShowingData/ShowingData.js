@@ -272,7 +272,7 @@ function ShowingData() {
                       </h4>
                       <div className="mb-4 p-4">
                         {mData ? (
-                          mData?.slice(0, 10)?.map((item, index) => (
+                          mData?.map((item, index) => (
                             <>
                               <p key={index}>{item}</p>
                             </>
@@ -296,7 +296,7 @@ function ShowingData() {
                       </h4>
                       <div className="mb-4 p-4">
                         {webDirectories ? (
-                          webDirectories?.slice(0, 5)?.map((item, index) => (
+                          webDirectories?.map((item, index) => (
                             <>
                               <p key={index}>{item}</p>
                             </>
