@@ -186,18 +186,20 @@ function Home() {
       {bdData.length === 0 ? (
         <Row className="justify-content-md-center">
           <Col md="auto">
-
             <Form
               className="my-4 bg-white rounded-4 shadow p-4"
               onSubmit={handleSubmit(onSubmit)}
             >
               <Row>
                 <Col>
-                  <h4 className="brand-color mb-4"><small>Welcome To Magic Checklist!</small><br /> Get started with Magic Checklist by filling out the form below</h4>
+                  <h4 className="brand-color mb-4">
+                    <small>Welcome To Magic Checklist!</small>
+                    <br /> Get started with Magic Checklist by filling out the
+                    form below
+                  </h4>
                 </Col>
               </Row>
               <Row>
-
                 <Col>
                   <Form.Group
                     className="mb-4"
@@ -239,7 +241,7 @@ function Home() {
                       aria-label="Default select example"
                       {...register("agencyLocation", { required: true })}
                     >
-                      <option >Select your Location</option>
+                      <option>Select your Location</option>
                       {options.map((x) => (
                         <option key={x.value}>{x.label}</option>
                       ))}
@@ -247,8 +249,6 @@ function Home() {
                   </Form.Group>
                 </Col>
               </Row>
-
-
 
               <Row>
                 <Col>
@@ -306,7 +306,6 @@ function Home() {
               </div>
               <div className="d-flex justify-content-center">
                 {isLoading ? (
-
                   <Spinner
                     as="span"
                     animation="border"
@@ -320,7 +319,6 @@ function Home() {
                     <Link to="/db/result">here</Link>
                   </h5>
                 ) : (
-
                   <Button type="submit" className="rt-btn-on">
                     Submit
                   </Button>

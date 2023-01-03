@@ -14,6 +14,7 @@ function ShowingData() {
   const [contentPlan, setContentPlan] = useState([]);
   
   const [bdData, setBdData] = useState([]);
+
   const [bdDataId, setBdDataId] = useState("");
 
   const [mData, setMData] = useState([]);
@@ -22,7 +23,7 @@ function ShowingData() {
   const [okrData, setOkrData] = useState([]);
   const [okrDataId, setOkrDataBd] = useState("");
   const navigate = useNavigate();
-
+  console.log(mData);
   let response1 = "";
   let response2 = "";
   let response3 = "";
@@ -83,10 +84,10 @@ function ShowingData() {
     // const res1 = data[0];
     // const res2 = res1?.replace("\n\n", "\n");
     const formatedIdeas = data[0]?.split("\n");
-    const array = []
+    const array = [];
     const test = formatedIdeas?.map((item) => {
-      if (item !== '') {
-        array.push(item)
+      if (item !== "") {
+        array.push(item);
       }
     });
     return array;
@@ -103,16 +104,15 @@ function ShowingData() {
           },
         })
         .then((response) => {
-          const bdData = formatData(response?.data[0]?.bdCheckList)
-          const salesData = formatData(response?.data[0]?.salesActivity)
-          const marketPlaceData = formatData(response?.data[0]?.marketPlace)
+          const bdData = formatData(response?.data[0]?.bdCheckList);
+          const salesData = formatData(response?.data[0]?.salesActivity);
+          const marketPlaceData = formatData(response?.data[0]?.marketPlace);
           if (bdData) {
             setBdData(bdData);
             setSalesActivity(salesData);
             setMarketPlace(response?.data[0]?.marketPlace);
             setBdDataId(response?.data[0]?._id);
           }
-
         })
         .catch((error) => {
           console.log(error);
@@ -127,11 +127,11 @@ function ShowingData() {
           },
         })
         .then((response) => {
-          const salesData = formatData(response?.data[0]?.marketingCheckList)
-          const webDirectories = formatData(response?.data[0]?.webDirectories)
+          const salesData = formatData(response?.data[0]?.marketingCheckList);
+          const webDirectories = formatData(response?.data[0]?.webDirectories);
           setMData(salesData);
-          setContentPlan(response?.data[0])
-          setWebDirectories(webDirectories)
+          setContentPlan(response?.data[0]);
+          setWebDirectories(webDirectories);
           setMDataId(response?.data[0]?._id);
         })
         .catch((error) => {
@@ -224,7 +224,7 @@ function ShowingData() {
                       </h4>
                       <div className="mb-4 p-4">
                         {salesActivity ? (
-                          salesActivity?.slice(0,5).map((item, index) => (
+                          salesActivity?.slice(0, 5).map((item, index) => (
                             <>
                               <p key={index}>{item}</p>
                             </>
@@ -272,7 +272,7 @@ function ShowingData() {
                       </h4>
                       <div className="mb-4 p-4">
                         {mData ? (
-                          mData?.map((item, index) => (
+                          mData?.slice(0, 10)?.map((item, index) => (
                             <>
                               <p key={index}>{item}</p>
                             </>
@@ -296,7 +296,7 @@ function ShowingData() {
                       </h4>
                       <div className="mb-4 p-4">
                         {webDirectories ? (
-                          webDirectories?.map((item, index) => (
+                          webDirectories?.slice(0, 5)?.map((item, index) => (
                             <>
                               <p key={index}>{item}</p>
                             </>
@@ -314,7 +314,7 @@ function ShowingData() {
                           </h4>
                         )}
                       </div>
-                       
+
                       <h4 className="rt-result-hading brand-color p-4">
                         Here is a 6-month content plan for showcasing your
                         Agency's framework based technical expertise:
