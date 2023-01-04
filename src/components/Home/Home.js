@@ -69,7 +69,9 @@ function Home() {
 
     const completion4 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write 10 points on how an ${framework === "Others"? "Web application framework": framework} agency can make a marketing plan for their business:`,
+      prompt: `Write 10 points on how an ${
+        framework === "Others" ? "Web application framework" : framework
+      } agency can make a marketing plan for their business:`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -77,7 +79,9 @@ function Home() {
 
     const completion5 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write  5  points ${framework === "Others"? "Web application framework": framework} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`,
+      prompt: `Write  5  points ${
+        framework === "Others" ? "Web application framework" : framework
+      } agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -85,7 +89,9 @@ function Home() {
 
     const completion6 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write me a 6 months Content plan in numbered format for ${data?.selectedServices?.toString()} Agency writing about ${framework === "Others"? "Web application framework": framework}`,
+      prompt: `Write me a 6 months Content plan in numbered format for ${data?.selectedServices?.toString()} Agency writing about ${
+        framework === "Others" ? "Web application framework" : framework
+      }`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -144,7 +150,7 @@ function Home() {
     "Ruby on Rails",
     "Vue.js",
     "GoHighLevel",
-    "Others"
+    "Others",
   ];
 
   const industry = [
@@ -327,12 +333,12 @@ function Home() {
                   />
                 ) : dbInfo === user?.email ? (
                   <h5>
-                    Please Delete & Regenerate form{" "}
-                    <Link to="/db/result">here</Link>
+                    If you wants to generate your magic checklist again please
+                    remove the old data from <Link to="/db/result">here</Link>
                   </h5>
                 ) : (
                   <Button type="submit" className="rt-btn-on">
-                     Magic Checklist
+                    Magic Checklist
                   </Button>
                 )}
               </div>
