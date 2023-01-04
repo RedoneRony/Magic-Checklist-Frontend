@@ -69,7 +69,7 @@ function Home() {
 
     const completion4 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write 10 points on how an ${data?.selectedFramework?.toString()} agency can make a marketing plan for their business:`,
+      prompt: `Write 10 points on how an ${framework === "Others"? "Web application framework": framework} agency can make a marketing plan for their business:`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -77,7 +77,7 @@ function Home() {
 
     const completion5 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write  5  points ${data?.selectedFramework?.toString()} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`,
+      prompt: `Write  5  points ${framework === "Others"? "Web application framework": framework} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -85,7 +85,7 @@ function Home() {
 
     const completion6 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write me a 6 months Content plan in numbered format for ${data?.selectedServices?.toString()} Agency writing about ${data?.selectedFramework?.toString()}`,
+      prompt: `Write me a 6 months Content plan in numbered format for ${data?.selectedServices?.toString()} Agency writing about ${framework === "Others"? "Web application framework": framework}`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -134,7 +134,17 @@ function Home() {
     "Magento",
     "Shopify",
     "Squarespace",
+    "Angular",
+    "ASP.NETCore",
+    "Django",
+    "Express",
+    "jQuery",
+    "Laravel",
+    "React",
+    "Ruby on Rails",
+    "Vue.js",
     "GoHighLevel",
+    "Others"
   ];
 
   const industry = [
@@ -243,7 +253,7 @@ function Home() {
                       aria-label="Default select example"
                       {...register("agencyLocation", { required: true })}
                     >
-                      <option>Select your Location</option>
+                      <option>United Sates</option>
                       {options.map((x) => (
                         <option key={x.value}>{x.label}</option>
                       ))}
@@ -322,7 +332,7 @@ function Home() {
                   </h5>
                 ) : (
                   <Button type="submit" className="rt-btn-on">
-                    Submit
+                     Magic Checklist
                   </Button>
                 )}
               </div>

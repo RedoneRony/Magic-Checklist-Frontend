@@ -157,8 +157,6 @@ function ShowingData() {
     getEmployeeEmails();
   }, [!bdData, !mData, !okrData]);
 
-  console.log(marketPlace);
-
   return (
     <>
       <div className="mt-4 rt-showing-data">

@@ -180,8 +180,6 @@ const Result = ({
                     )}
                   </div>
 
-                 
-
                   <div className="mb-4 p-4">
                     <Form.Label>
                       Marketing Checklist For For {userData?.agencyName} in 2023 :
