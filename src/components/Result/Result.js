@@ -228,7 +228,7 @@ const Result = ({
                   <div className="mb-4 p-4">
                     <Form.Label>
                       Here is a suggested 6-month content plan for a {service}
-                      agency writing about {framework}:
+                      agency writing about {framework === "Others"? "Web application framework": framework}:
                     </Form.Label>
                     {marketing2.length ? (
                       marketing2?.map((item, index) => (
