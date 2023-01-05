@@ -12,7 +12,7 @@ function ShowingData() {
   const [marketPlace, setMarketPlace] = useState([]);
   const [webDirectories, setWebDirectories] = useState([]);
   const [contentPlan, setContentPlan] = useState([]);
-  
+
   const [bdData, setBdData] = useState([]);
 
   const [bdDataId, setBdDataId] = useState("");
@@ -23,7 +23,6 @@ function ShowingData() {
   const [okrData, setOkrData] = useState([]);
   const [okrDataId, setOkrDataBd] = useState("");
   const navigate = useNavigate();
-  console.log(mData);
   let response1 = "";
   let response2 = "";
   let response3 = "";
@@ -39,7 +38,7 @@ function ShowingData() {
       })
       .then((response) => {
         response1 = response.status;
-        setBdData([])
+        setBdData([]);
       })
       .catch((error) => {
         console.log(error);
@@ -54,7 +53,7 @@ function ShowingData() {
       })
       .then((response) => {
         response2 = response.status;
-        setMData([])
+        setMData([]);
       })
       .catch((error) => {
         console.log(error);
@@ -69,7 +68,7 @@ function ShowingData() {
       })
       .then((response) => {
         response3 = response.status;
-        setOkrData([])
+        setOkrData([]);
       })
       .catch((error) => {
         console.log(error);
@@ -341,8 +340,6 @@ function ShowingData() {
           </Row>
         </Tab.Container>
       </div>
-
-
     </>
   );
 }

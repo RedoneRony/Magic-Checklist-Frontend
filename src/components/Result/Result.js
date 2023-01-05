@@ -19,34 +19,33 @@ const Result = ({
   goals1,
   service,
   framework,
+  question1,
+  question2,
+  question3,
+  question4,
+  question5,
+  question6,
+  question7,
+  question8,
 }) => {
   const navigate = useNavigate();
   const resGoal = goals[0]?.text;
   const resGoal1 = goals1[0]?.text;
   const { user } = useContext(AuthContext);
   function formatData(data) {
-  // const res1 = data[0]?.text;
-  // const res2 = res1?.replace("\n\n", "\n");
-  // const res3 = res2?.replace(/(\r\n|\n|\r)/gm, "");
-  // const res4 = res3?.replace(/[0-9]/g, "");
-  // const res5 = res4?.split(".");
-  // const resultData = res5?.filter(function (el) {
-  //   return el != "";
-  // });
-  const formatedIdeas = data[0]?.text.split(/\d+\./);
-  return formatedIdeas;
+    const formatedIdeas = data[0]?.text.split(/\d+\./);
+    return formatedIdeas;
   }
 
   const formatMarketingData2 = (data) => {
     const res1 = data[0]?.text;
-    // const res2 = res1?.replace("\n\n", "\n");
     const formatedIdeas = res1?.split("\n");
-    const array = []
+    const array = [];
     const test = formatedIdeas?.map((item) => {
-        if(item !== ''){
-          array.push(item)
-        }
-});
+      if (item !== "") {
+        array.push(item);
+      }
+    });
     return array;
   };
 
@@ -58,7 +57,6 @@ const Result = ({
   // const formatedMarktingData = formatData(marketing);
   // const formatedMarktingData1 = formatData(marketing1);
   // const formatedMarktingData2 = formatData(marketing2);
-
 
   const handleSaveToDb = async () => {
     const response1 = await axios.post(
@@ -98,24 +96,26 @@ const Result = ({
     }
   };
 
-  
   return (
     <>
       <Row className="justify-content-md-center rt-result">
         <div className="my-4 bg-white rounded-4 shadow p-4">
           <Row>
             <Col>
-              <Form >
+              <Form>
                 <div ref={ref} style={{ height: "auto" }}>
                   <div className="mb-4 p-4">
+                    <h4 className="d-none">{question1}</h4>
                     <Form.Label>
-                      Business development Checklist For {userData?.agencyName} in
-                      2023:
+                      Business development Checklist For {userData?.agencyName}{" "}
+                      in 2023:
                     </Form.Label>
                     {formatedBdData ? (
-                      formatedBdData?.slice(1,21).map((item, index) => (
+                      formatedBdData?.slice(1, 21).map((item, index) => (
                         <>
-                          <p key={index}>{index+1}.{item}</p>
+                          <p key={index}>
+                            {index + 1}.{item}
+                          </p>
                         </>
                       ))
                     ) : (
@@ -132,14 +132,17 @@ const Result = ({
                     )}
                   </div>
                   <div className="mb-4 p-4">
+                    <h4 className="d-none">{question2}</h4>
                     <Form.Label>
                       5 Type of Sales Activity {userData?.agencyName} to do to
                       get more Business in 2023:
                     </Form.Label>
                     {formatedBdData1 ? (
-                      formatedBdData1?.slice(1,6).map((item, index) => (
+                      formatedBdData1?.slice(1, 6).map((item, index) => (
                         <>
-                          <p key={index}>{index+1}.{item}</p>
+                          <p key={index}>
+                            {index + 1}.{item}
+                          </p>
                         </>
                       ))
                     ) : (
@@ -157,8 +160,10 @@ const Result = ({
                   </div>
 
                   <div className="mb-4 p-4">
+                    <h4 className="d-none">{question3}</h4>
                     <Form.Label>
-                    Here are five marketplaces where  {service} agency can find work:
+                      Here are five marketplaces where {service} agency can find
+                      work:
                     </Form.Label>
                     {formatedBdData2.length ? (
                       formatedBdData2?.map((item, index) => (
@@ -181,12 +186,17 @@ const Result = ({
                   </div>
 
                   <div className="mb-4 p-4">
+                    <h4 className="d-none">{question4}</h4>
                     <Form.Label>
-                      Marketing Checklist For For {userData?.agencyName} in 2023 :
+                      Marketing Checklist For For {userData?.agencyName} in 2023
+                      :
                     </Form.Label>
                     {formatedMarketing ? (
-                      formatedMarketing?.slice(1,11).map((item, index) => (
-                        <p key={index}> {index+1}.{item}</p>
+                      formatedMarketing?.slice(1, 11).map((item, index) => (
+                        <p key={index}>
+                          {" "}
+                          {index + 1}.{item}
+                        </p>
                       ))
                     ) : (
                       <h4>
@@ -203,13 +213,16 @@ const Result = ({
                   </div>
 
                   <div className="mb-4 p-4">
+                    <h4 className="d-none">{question5}</h4>
                     <Form.Label>
-                      Here are five web directories where a software agency can list
-                      their website, and get client review done:
+                      Here are five web directories where a software agency can
+                      list their website, and get client review done:
                     </Form.Label>
                     {formatedMarketing1 ? (
-                      formatedMarketing1?.slice(1,6)?.map((item, index) => (
-                        <p key={index}>{index +1}.{item}</p>
+                      formatedMarketing1?.slice(1, 6)?.map((item, index) => (
+                        <p key={index}>
+                          {index + 1}.{item}
+                        </p>
                       ))
                     ) : (
                       <h4>
@@ -226,9 +239,14 @@ const Result = ({
                   </div>
 
                   <div className="mb-4 p-4">
+                    <h4 className="d-none">{question6}</h4>
                     <Form.Label>
                       Here is a suggested 6-month content plan for a {service}
-                      agency writing about {framework === "Others"? "Web application framework": framework}:
+                      agency writing about{" "}
+                      {framework === "Others"
+                        ? "Web application framework"
+                        : framework}
+                      :
                     </Form.Label>
                     {marketing2.length ? (
                       marketing2?.map((item, index) => (
@@ -249,6 +267,7 @@ const Result = ({
                   </div>
 
                   <div className="mb-4 p-4">
+                    <h4 className="d-none">{question7}</h4>
                     <Form.Label>
                       Goals and Objective for your Team in Q1 2023:
                     </Form.Label>
@@ -271,6 +290,7 @@ const Result = ({
                   </div>
 
                   <div className="mb-4 p-4">
+                    <h4 className="d-none">{question8}</h4>
                     <Form.Label>
                       Goals and Objective for your Team in 2023:
                     </Form.Label>
@@ -304,8 +324,14 @@ const Result = ({
                 formatedBdData2 &&
                 marketing &&
                 marketing1 &&
-                marketing2 && <Button onClick={handleSaveToDb}  className="rt-btn-on mr-3">Save</Button>}
-              <Button onClick={() => navigate(0)}  className="rt-btn">Regenerate</Button>
+                marketing2 && (
+                  <Button onClick={handleSaveToDb} className="rt-btn-on mr-3">
+                    Save
+                  </Button>
+                )}
+              <Button onClick={() => navigate(0)} className="rt-btn">
+                Regenerate
+              </Button>
             </Col>
           </Row>
         </div>

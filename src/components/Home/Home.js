@@ -34,6 +34,17 @@ function Home() {
   const [dbInfo, setDbInfo] = useState("");
 
   const [isLoading, setLoading] = useState(false);
+
+  // storing questions
+  const [question1, setQuestion1] = useState("");
+  const [question2, setQuestion2] = useState("");
+  const [question3, setQuestion3] = useState("");
+  const [question4, setQuestion4] = useState("");
+  const [question5, setQuestion5] = useState("");
+  const [question6, setQuestion6] = useState("");
+  const [question7, setQuestion7] = useState("");
+  const [question8, setQuestion8] = useState("");
+
   const { register, handleSubmit, reset } = useForm();
   // country options
   const options = useMemo(() => countryList().getData(), []);
@@ -43,6 +54,36 @@ function Home() {
     setService(data?.selectedServices?.toString());
     setFramework(data?.selectedFramework?.toString());
     setLoading(true);
+
+    // storing data to the state
+
+    setQuestion1(
+      `Write 21 points on business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency`
+    );
+    setQuestion2(
+      `Write 6 types of sales activities that a ${data?.selectedServices?.toString()} agency can do`
+    );
+    setQuestion3(
+      `List of 5 market place ${data?.selectedServices?.toString()} agency can find work with link to those website. Do not include Linkedin`
+    );
+    setQuestion4(
+      `Write 10 points on how an ${
+        framework === "Others" ? "Web application framework" : framework
+      } agency can make a marketing plan for their business:`
+    );
+    setQuestion5(
+      `Write  5  points ${framework} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`
+    );
+    setQuestion6(
+      `Write me a 6 months Content plan in numbered format for ${data?.selectedServices?.toString()} Agency writing about ${framework}`
+    );
+    setQuestion7(
+      `3 sample okr for ${data?.agencySize?.toString()} web development agency For Q1 to get more leads and warm leads for ${data?.selectedIndustry?.toString()}`
+    );
+    setQuestion8(
+      `3 sample okr for year 2023 ${data?.selectedServices?.toString()} agency niching industry ${data?.selectedIndustry?.toString()}`
+    );
+
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `Write 21 points on business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency`,
@@ -358,6 +399,14 @@ function Home() {
           goals1={goals1}
           service={service}
           framework={framework}
+          question1={question1}
+          question2={question2}
+          question3={question3}
+          question4={question4}
+          question5={question5}
+          question6={question6}
+          question7={question7}
+          question8={question8}
         ></Result>
       )}
     </div>

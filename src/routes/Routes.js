@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import DownloadAllUser from "../components/DownloadAllUser/DownloadAllUser";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
 import ShowingData from "../components/ShowingData/ShowingData";
@@ -38,6 +39,14 @@ export const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ShowingData />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/db/download/all/user/",
+        element: (
+          <PrivateRoute>
+            <DownloadAllUser />
           </PrivateRoute>
         ),
       },

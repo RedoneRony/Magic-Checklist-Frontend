@@ -35,6 +35,7 @@ const Login = () => {
       })
       .finally(() => {
         setLoading(false);
+        insertNewUserToDb(currentUser.email);
         getEmployeeEmails(currentUser.email);
       });
   };
@@ -59,6 +60,21 @@ const Login = () => {
         setLoading(false);
         toast.success("Login Successful ");
         navigate(result === 1 ? "/db/result" : "/db/home");
+      });
+  };
+
+  // insert new user to db
+  const insertNewUserToDb = async (value) => {
+    const addNewUser = {
+      email: `${value}`,
+    };
+    await axios
+      .post(`${process.env.REACT_APP_SITE_API}/api/user/createList`, addNewUser)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
