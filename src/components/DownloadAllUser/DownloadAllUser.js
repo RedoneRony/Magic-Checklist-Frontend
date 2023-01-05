@@ -36,7 +36,7 @@ const DownloadAllUser = () => {
     let csv = convertArrayOfObjectsToCSV(array);
     if (csv == null) return;
 
-    const filename = "export.csv";
+    const filename = "allUserEmail.csv";
 
     if (!csv.match(/^data:text\/csv/i)) {
       csv = `data:text/csv;charset=utf-8,${csv}`;
@@ -48,16 +48,21 @@ const DownloadAllUser = () => {
   };
 
   const ExportCSV = ({ onExport }) => (
-    <Button onClick={(e) => onExport(e.target.value)} className="rt-btn mt-4">
-      Export CSV
-    </Button>
+    <>
+      <h4 className="mt-4 brand-color">Download User List</h4>
+      <Button onClick={(e) => onExport(e.target.value)} className="rt-btn mt-4">
+        Export CSV
+      </Button>
+    </>
   );
 
   useEffect(() => {
     const getAllEmails = async () => {
       // get data
       await axios
-        .get(`${process.env.REACT_APP_SITE_API}/api/user/getAll`)
+        .get(
+          `${process.env.REACT_APP_SITE_API}/api/userOtherInformation/getAll`
+        )
         .then((response) => {
           const userData = response?.data?.map((i) => i);
           setAllUserEmail(userData);

@@ -49,14 +49,37 @@ function Home() {
   // country options
   const options = useMemo(() => countryList().getData(), []);
 
+  const insertOtherInformationToDb = async (data) => {
+    const addUserOtherInformation = {
+      email: user.email,
+      agencyName: data.agencyName,
+      agencySize: data.agencySize,
+      location: data.agencyLocation,
+    };
+
+    await axios
+      .post(
+        `${process.env.REACT_APP_SITE_API}/api/userOtherInformation/createList`,
+        addUserOtherInformation
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const onSubmit = async (data) => {
     setUserData(data);
     setService(data?.selectedServices?.toString());
     setFramework(data?.selectedFramework?.toString());
     setLoading(true);
 
-    // storing data to the state
+    // store user other information to db
+    insertOtherInformationToDb(data);
 
+    // storing data to the state
     setQuestion1(
       `Write 21 points on business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency`
     );

@@ -120,8 +120,8 @@ const Result = ({
             <Col>
               <Form>
                 <div ref={ref} style={{ height: "auto" }}>
-                  <div className="mb-4 p-4">
-                    <h4 className="d-none">{question1}</h4>
+                  <div className="mb-2 p-2">
+                    <h6 className="rtn-question-title">{question1}</h6>
                     <Form.Label>{bdCheckListTitle}</Form.Label>
                     {formatedBdData ? (
                       formatedBdData?.slice(1, 21).map((item, index) => (
@@ -144,8 +144,8 @@ const Result = ({
                       </h4>
                     )}
                   </div>
-                  <div className="mb-4 p-4">
-                    <h4 className="d-none">{question2}</h4>
+                  <div className="mb-2 p-2">
+                    <h6 className="rtn-question-title">{question2}</h6>
                     <Form.Label>{salesActivityTitle}</Form.Label>
                     {formatedBdData1 ? (
                       formatedBdData1?.slice(1, 6).map((item, index) => (
@@ -169,8 +169,8 @@ const Result = ({
                     )}
                   </div>
 
-                  <div className="mb-4 p-4">
-                    <h4 className="d-none">{question3}</h4>
+                  <div className="mb-2 p-2">
+                    <h6 className="rtn-question-title">{question3}</h6>
                     <Form.Label>{marketPlaceTitle}</Form.Label>
                     {formatedBdData2.length ? (
                       formatedBdData2?.map((item, index) => (
@@ -192,8 +192,8 @@ const Result = ({
                     )}
                   </div>
 
-                  <div className="mb-4 p-4">
-                    <h4 className="d-none">{question4}</h4>
+                  <div className="mb-2 p-2">
+                    <h6 className="rtn-question-title">{question4}</h6>
                     <Form.Label>{marketingCheckListTitle}</Form.Label>
                     {formatedMarketing ? (
                       formatedMarketing?.slice(1, 11).map((item, index) => (
@@ -216,8 +216,8 @@ const Result = ({
                     )}
                   </div>
 
-                  <div className="mb-4 p-4">
-                    <h4 className="d-none">{question5}</h4>
+                  <div className="mb-2 p-2">
+                    <h6 className="rtn-question-title">{question5}</h6>
                     <Form.Label>{webDirectoriesTitle}</Form.Label>
                     {formatedMarketing1 ? (
                       formatedMarketing1?.slice(1, 6)?.map((item, index) => (
@@ -239,8 +239,8 @@ const Result = ({
                     )}
                   </div>
 
-                  <div className="mb-4 p-4">
-                    <h4 className="d-none">{question6}</h4>
+                  <div className="mb-2 p-2">
+                    <h6 className="rtn-question-title">{question6}</h6>
                     <Form.Label>{contentPlanTitle}</Form.Label>
                     {marketing2.length ? (
                       marketing2?.map((item, index) => (
@@ -260,8 +260,8 @@ const Result = ({
                     )}
                   </div>
 
-                  <div className="mb-4 p-4">
-                    <h4 className="d-none">{question7}</h4>
+                  <div className="mb-2 p-2">
+                    <h6 className="rtn-question-title">{question7}</h6>
                     <Form.Label>{okr1Title}</Form.Label>
                     <pre>
                       {resGoal ? (
@@ -281,8 +281,8 @@ const Result = ({
                     </pre>
                   </div>
 
-                  <div className="mb-4 p-4">
-                    <h4 className="d-none">{question8}</h4>
+                  <div className="mb-2 p-2">
+                    <h6 className="rtn-question-title">{question8}</h6>
                     <Form.Label>{okrYearTitle}</Form.Label>
                     <pre>
                       {resGoal1 ? (

@@ -7,7 +7,7 @@ import { AuthContext } from "../contexts/AuthProvider";
 
 export const Main = () => {
   const { user, logOut } = useContext(AuthContext);
-
+  const currentYear = new Date().getFullYear();
   return (
     <>
       <Navbar bg="light" className="rt-nav">
@@ -32,6 +32,13 @@ export const Main = () => {
       <Container>
         <Outlet />
       </Container>
+
+      <footer className="bg-light text-center text-lg-start">
+        <div className="text-center p-3">
+          ©{currentYear} Copyright
+          <Link to="https://managedcoder.com/"> Managedcoder</Link>
+        </div>
+      </footer>
     </>
   );
 };
