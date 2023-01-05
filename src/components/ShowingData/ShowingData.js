@@ -14,16 +14,18 @@ function ShowingData() {
   const [contentPlan, setContentPlan] = useState([]);
   
   const [bdData, setBdData] = useState([]);
+  const [bdFullData, setBdFullData] = useState([]);
 
   const [bdDataId, setBdDataId] = useState("");
 
   const [mData, setMData] = useState([]);
+  const [mDataFull, setMDataFull] = useState([]);
   const [mDataId, setMDataId] = useState("");
 
   const [okrData, setOkrData] = useState([]);
+  const [okrDataFull, setOkrDataFull] = useState([]);
   const [okrDataId, setOkrDataBd] = useState("");
   const navigate = useNavigate();
-  console.log(mData);
   let response1 = "";
   let response2 = "";
   let response3 = "";
@@ -104,6 +106,7 @@ function ShowingData() {
           },
         })
         .then((response) => {
+          setBdFullData(response.data[0]);
           const bdData = formatData(response?.data[0]?.bdCheckList);
           const salesData = formatData(response?.data[0]?.salesActivity);
           const marketPlaceData = formatData(response?.data[0]?.marketPlace);
@@ -129,6 +132,7 @@ function ShowingData() {
         .then((response) => {
           const salesData = formatData(response?.data[0]?.marketingCheckList);
           const webDirectories = formatData(response?.data[0]?.webDirectories);
+          setMDataFull(response.data[0]);
           setMData(salesData);
           setContentPlan(response?.data[0]);
           setWebDirectories(webDirectories);
@@ -147,6 +151,7 @@ function ShowingData() {
           },
         })
         .then((response) => {
+          setOkrDataFull(response.data[0]);
           setOkrData(response?.data[0]);
           setOkrDataBd(response?.data[0]?._id);
         })
@@ -194,7 +199,7 @@ function ShowingData() {
                   <>
                     <Tab.Pane eventKey="businessDevelopment">
                       <h4 className="rt-result-hading brand-color p-4">
-                        Business development Checklist For Your Agency in 2023:
+                        {bdFullData?.bdCheckListTitle}
                       </h4>
                       <div className="mb-4 p-4">
                         {bdData ? (
@@ -217,8 +222,7 @@ function ShowingData() {
                         )}
                       </div>
                       <h4 className="rt-result-hading brand-color p-4">
-                        5 Type of Sales Activities to do for getting more
-                        Business in 2023:
+                      {bdFullData?.salesActivityTitle}
                       </h4>
                       <div className="mb-4 p-4">
                         {salesActivity ? (
@@ -241,7 +245,7 @@ function ShowingData() {
                         )}
                       </div>
                       <h4 className="rt-result-hading brand-color p-4">
-                        Here are five marketplaces your agency can find work:
+                       {bdFullData?.marketPlaceTitle}
                       </h4>
                       <div className="mb-4 p-4">
                         {marketPlace ? (
@@ -266,7 +270,7 @@ function ShowingData() {
                     </Tab.Pane>
                     <Tab.Pane eventKey="marketing">
                       <h4 className="rt-result-hading brand-color p-4">
-                        Marketing Checklist For Your Agency for 2023:
+                        {mDataFull?.marketingCheckListTitle}
                       </h4>
                       <div className="mb-4 p-4">
                         {mData ? (
@@ -289,8 +293,7 @@ function ShowingData() {
                         )}
                       </div>
                       <h4 className="rt-result-hading brand-color p-4">
-                        Here are five web directories where your agency can list
-                        your website, and get client review done:
+                        {mDataFull.webDirectoriesTitle}
                       </h4>
                       <div className="mb-4 p-4">
                         {webDirectories ? (
@@ -314,18 +317,17 @@ function ShowingData() {
                       </div>
 
                       <h4 className="rt-result-hading brand-color p-4">
-                        Here is a 6-month content plan for showcasing your
-                        Agency's framework based technical expertise:
+                        {mDataFull.contentPlanTitle}
                       </h4>
                       <pre>{contentPlan?.contentPlan}</pre>
                     </Tab.Pane>
                     <Tab.Pane eventKey="okr">
                       <h4 className="rt-result-hading brand-color p-4">
-                        Goals and Objective for your Team in Q1 2023:
+                        {okrDataFull.okr1Title}
                       </h4>
                       <pre>{okrData?.okrQ1}</pre>
                       <h4 className="rt-result-hading brand-color p-4">
-                        Goals and Objective for your Team in Year 2023:
+                        {okrDataFull.okrYearTitle}
                       </h4>
                       <pre>{okrData?.okrYear}</pre>
                     </Tab.Pane>
