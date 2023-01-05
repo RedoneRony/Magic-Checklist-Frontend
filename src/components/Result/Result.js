@@ -54,17 +54,28 @@ const Result = ({
   const formatedMarketing = formatData(marketing);
   const formatedMarketing1 = marketing1[0]?.text.split(/\d+\./);
   const formatedBdData2 = formatMarketingData2(bdData2);
-  // const formatedMarktingData = formatData(marketing);
-  // const formatedMarktingData1 = formatData(marketing1);
-  // const formatedMarktingData2 = formatData(marketing2);
+
+  const bdCheckListTitle = `Business development Checklist For ${userData?.agencyName} in 2023:`;
+  const salesActivityTitle = `5 Type of Sales Activity ${userData?.agencyName} to do to get more Business in 2023:`;
+  const marketPlaceTitle = `Here are five marketplaces where  ${service} agency can find work:`;
+  const marketingCheckListTitle = `Marketing Checklist For ${userData?.agencyName} in 2023`;
+  const webDirectoriesTitle = `Here are five web directories where a software agency can list their website, and get client review done:`;
+  const contentPlanTitle = `Here is a suggested 6-month content plan for a ${service} agency writing about ${
+    framework === "Others" ? "Web application framework" : framework
+  }:`;
+  const okr1Title = `Goals and Objective for ${userData?.agencyName} in Q1 2023:`;
+  const okrYearTitle = `Goals and Objective for ${userData?.agencyName} in 2023:`;
 
   const handleSaveToDb = async () => {
     const response1 = await axios.post(
       `${process.env.REACT_APP_SITE_API}/api/bd/createBdList`,
       {
         email: user?.email,
+        bdCheckListTitle,
         bdCheckList: bdData[0].text,
+        salesActivityTitle,
         salesActivity: bdData1[0].text,
+        marketPlaceTitle,
         marketPlace: formatedBdData2,
       }
     );
@@ -73,8 +84,11 @@ const Result = ({
       `${process.env.REACT_APP_SITE_API}/api/marketing/createList`,
       {
         email: user?.email,
+        marketingCheckListTitle,
         marketingCheckList: marketing[0].text,
+        webDirectoriesTitle,
         webDirectories: marketing1[0].text,
+        contentPlanTitle,
         contentPlan: marketing2[0].text,
       }
     );
@@ -82,7 +96,9 @@ const Result = ({
       `${process.env.REACT_APP_SITE_API}/api/okr/createList`,
       {
         email: user?.email,
+        okr1Title,
         okrQ1: resGoal,
+        okrYearTitle,
         okrYear: resGoal1,
       }
     );
@@ -106,10 +122,7 @@ const Result = ({
                 <div ref={ref} style={{ height: "auto" }}>
                   <div className="mb-4 p-4">
                     <h4 className="d-none">{question1}</h4>
-                    <Form.Label>
-                      Business development Checklist For {userData?.agencyName}{" "}
-                      in 2023:
-                    </Form.Label>
+                    <Form.Label>{bdCheckListTitle}</Form.Label>
                     {formatedBdData ? (
                       formatedBdData?.slice(1, 21).map((item, index) => (
                         <>
@@ -133,10 +146,7 @@ const Result = ({
                   </div>
                   <div className="mb-4 p-4">
                     <h4 className="d-none">{question2}</h4>
-                    <Form.Label>
-                      5 Type of Sales Activity {userData?.agencyName} to do to
-                      get more Business in 2023:
-                    </Form.Label>
+                    <Form.Label>{salesActivityTitle}</Form.Label>
                     {formatedBdData1 ? (
                       formatedBdData1?.slice(1, 6).map((item, index) => (
                         <>
@@ -161,10 +171,7 @@ const Result = ({
 
                   <div className="mb-4 p-4">
                     <h4 className="d-none">{question3}</h4>
-                    <Form.Label>
-                      Here are five marketplaces where {service} agency can find
-                      work:
-                    </Form.Label>
+                    <Form.Label>{marketPlaceTitle}</Form.Label>
                     {formatedBdData2.length ? (
                       formatedBdData2?.map((item, index) => (
                         <>
@@ -187,10 +194,7 @@ const Result = ({
 
                   <div className="mb-4 p-4">
                     <h4 className="d-none">{question4}</h4>
-                    <Form.Label>
-                      Marketing Checklist For For {userData?.agencyName} in 2023
-                      :
-                    </Form.Label>
+                    <Form.Label>{marketingCheckListTitle}</Form.Label>
                     {formatedMarketing ? (
                       formatedMarketing?.slice(1, 11).map((item, index) => (
                         <p key={index}>
@@ -214,10 +218,7 @@ const Result = ({
 
                   <div className="mb-4 p-4">
                     <h4 className="d-none">{question5}</h4>
-                    <Form.Label>
-                      Here are five web directories where a software agency can
-                      list their website, and get client review done:
-                    </Form.Label>
+                    <Form.Label>{webDirectoriesTitle}</Form.Label>
                     {formatedMarketing1 ? (
                       formatedMarketing1?.slice(1, 6)?.map((item, index) => (
                         <p key={index}>
@@ -240,14 +241,7 @@ const Result = ({
 
                   <div className="mb-4 p-4">
                     <h4 className="d-none">{question6}</h4>
-                    <Form.Label>
-                      Here is a suggested 6-month content plan for a {service}
-                      agency writing about{" "}
-                      {framework === "Others"
-                        ? "Web application framework"
-                        : framework}
-                      :
-                    </Form.Label>
+                    <Form.Label>{contentPlanTitle}</Form.Label>
                     {marketing2.length ? (
                       marketing2?.map((item, index) => (
                         <pre key={index}>{item.text}</pre>
@@ -268,9 +262,7 @@ const Result = ({
 
                   <div className="mb-4 p-4">
                     <h4 className="d-none">{question7}</h4>
-                    <Form.Label>
-                      Goals and Objective for your Team in Q1 2023:
-                    </Form.Label>
+                    <Form.Label>{okr1Title}</Form.Label>
                     <pre>
                       {resGoal ? (
                         resGoal
@@ -291,9 +283,7 @@ const Result = ({
 
                   <div className="mb-4 p-4">
                     <h4 className="d-none">{question8}</h4>
-                    <Form.Label>
-                      Goals and Objective for your Team in 2023:
-                    </Form.Label>
+                    <Form.Label>{okrYearTitle}</Form.Label>
                     <pre>
                       {resGoal1 ? (
                         resGoal1
