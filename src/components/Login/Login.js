@@ -23,6 +23,7 @@ const Login = () => {
   const handleProviderLogin = (provider) => {
     providerLogin(provider)
       .then((result) => {
+        toast.success("Login Successful ");
         const user = result.user;
         currentUser = {
           email: user.email,
@@ -58,7 +59,6 @@ const Login = () => {
       })
       .finally(() => {
         setLoading(false);
-        toast.success("Login Successful ");
         navigate(result === 1 ? "/db/result" : "/db/home");
       });
   };

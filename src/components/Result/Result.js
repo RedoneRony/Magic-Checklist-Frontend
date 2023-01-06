@@ -58,7 +58,7 @@ const Result = ({
   const bdCheckListTitle = `Business development Checklist For ${userData?.agencyName} in 2023:`;
   const salesActivityTitle = `5 Type of Sales Activity ${userData?.agencyName} to do to get more Business in 2023:`;
   const marketPlaceTitle = `Here are five marketplaces where  ${service} agency can find work:`;
-  const marketingCheckListTitle = `Marketing Checklist For ${userData?.agencyName} in 2023`;
+  const marketingCheckListTitle = `Marketing Checklist For ${userData?.agencyName} in 2023:`;
   const webDirectoriesTitle = `Here are five web directories where a software agency can list their website, and get client review done:`;
   const contentPlanTitle = `Here is a suggested 6-month content plan for a ${service} agency writing about ${
     framework === "Others" ? "Web application framework" : framework
