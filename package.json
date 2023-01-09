@@ -23,10 +23,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "prod": "REACT_APP_LIVE=true .\"/node_modules/.bin/react-scripts\" build",
+    "start": ".\"/node_modules/.bin/react-scripts\" start",
+    "build": "npm i && .\"/node_modules/.bin/react-scripts\" build",
+    "test": ".\"/node_modules/.bin/react-scripts\" test --env=jsdom",
+    "eject": ".\"/node_modules/.bin/react-scripts\" eject"
   },
   "eslintConfig": {
     "extends": [
