@@ -15,11 +15,12 @@
 
 @page {
     size: A4;
-    margin: 0;
+    margin:  60px;
   }
-  @media print {
+  /* @media print {
     html, body {
       width: 210mm;
       height: 297mm;
+      margin: 40px;
     }
-}  
+    }   */

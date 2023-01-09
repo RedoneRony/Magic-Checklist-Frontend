@@ -12,3 +12,7 @@ a {
   color: #2A878F !important;
   text-decoration: none !important;
 }
+pre {
+  white-space: pre-wrap;
+}
+
