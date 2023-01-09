@@ -25,9 +25,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set PORT=3029 && react-scripts start",
+    "start": "set PORT=3000 && react-scripts start",
     "magicChecklist:local": "set PORT=3000 && react-scripts start",
-    "start_prod":"PORT=3029 && react-scripts start",
+    "start_prod":"PORT=3000 && react-scripts start",
     "build": "react-scripts build",
     "staging": "npm i && react-scripts build",
     "restart": "npm install && npm start",
