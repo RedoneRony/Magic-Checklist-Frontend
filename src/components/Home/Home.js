@@ -32,7 +32,7 @@ function Home() {
   const [service, setService] = useState("");
   const [framework, setFramework] = useState("");
   const [dbInfo, setDbInfo] = useState("");
-
+  console.log("Hello");
   const [isLoading, setLoading] = useState(false);
 
   // storing questions
