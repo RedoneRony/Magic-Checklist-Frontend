@@ -5,6 +5,7 @@ import Login from "../components/Login/Login";
 import ShowingData from "../components/ShowingData/ShowingData";
 import { Main } from "../layout/Main";
 import PrivateRoute from "./PrivateRoute";
+import PdfFile from './../components/PDF/PdfFile';
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -39,6 +40,14 @@ export const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ShowingData />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/db/viewPDF",
+        element: (
+          <PrivateRoute>
+            <PdfFile />
           </PrivateRoute>
         ),
       },

@@ -1,13 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState,useRef } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthProvider'
 import { Tab, Tabs, Col, Row, Nav, Spinner, Button } from 'react-bootstrap'
 import { FaHandshake, FaRegDotCircle, FaRocket } from 'react-icons/fa'
+import ReactToPrint from 'react-to-print';
 import './ShowingData.css'
 
 function ShowingData () {
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
+  const inputRef = useRef();
   const [salesActivity, setSalesActivity] = useState([])
   const [marketPlace, setMarketPlace] = useState([])
   const [webDirectories, setWebDirectories] = useState([])
@@ -188,12 +190,16 @@ function ShowingData () {
             </Col>
             <Col>
               <div className='mb-3'>
+
+              <Button onClick={() =>navigate('/db/viewPDF')} className='rt-btn-on mb-2'>
+                  PDF View
+                </Button>
                 <Button onClick={deleteData} className='rt-btn'>
                   Delete & Regenerate
                 </Button>
               </div>
             </Col>
-            <Col sm={12}>
+            <Col sm={12} ref={inputRef}>
               <Tab.Content className='my-4 bg-white rounded-4 shadow p-4'>
                 {bdData && mData && okrData ? (
                   <>
