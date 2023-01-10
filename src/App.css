@@ -45,3 +45,10 @@
 .rtn-question-title{
     color: #fff;
 }
+
+
+.bg-theme-light{
+    background: rgba(42, 135, 143, 0.05);
+    border-radius: 20px;
+    padding: 15px;
+}

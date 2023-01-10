@@ -32,6 +32,7 @@ function Home() {
   const [service, setService] = useState("");
   const [framework, setFramework] = useState("");
   const [dbInfo, setDbInfo] = useState("");
+  const [arrayDevide, setArrayDevide] = useState("");
   console.log("Chat GPT");
   const [isLoading, setLoading] = useState(false);
 
@@ -244,6 +245,11 @@ function Home() {
     "Other Industries",
   ];
 
+  console.log();
+  const devideMe = (arr) => {
+    setArrayDevide(Math.ceil((arr.length - 1) / 2));
+  };
+
   useEffect(() => {
     const getEmployeeEmails = async () => {
       await axios
@@ -261,6 +267,7 @@ function Home() {
         });
     };
     getEmployeeEmails();
+    devideMe(frameWorks);
   }, []);
 
   return (
@@ -333,7 +340,7 @@ function Home() {
               </Row>
 
               <Row>
-                <Col>
+                <Col className="bg-theme-light m-2 p-3">
                   <div className="mb-4">
                     <Form.Label>
                       {" "}
@@ -350,26 +357,53 @@ function Home() {
                     ))}
                   </div>
                 </Col>
-                <Col>
+                <Col className="bg-theme-light m-2 p-3">
                   <div className="mb-4">
                     <Form.Label>
                       {" "}
                       Choose Your Framework : (Pick 2 For Best Result ){" "}
                     </Form.Label>
-                    {frameWorks.map((item, index) => (
-                      <Form.Check
-                        key={index}
-                        id={item}
-                        label={item}
-                        value={item}
-                        {...register("selectedFramework", { required: true })}
-                      />
-                    ))}
+                    <Row>
+                      <Col>
+                        {frameWorks.map((item, index) => (
+                          <>
+                            {index <= arrayDevide ? (
+                              <Form.Check
+                                key={index}
+                                id={item}
+                                label={item}
+                                value={item}
+                                {...register("selectedFramework", {
+                                  required: true,
+                                })}
+                              />
+                            ) : null}
+                          </>
+                        ))}
+                      </Col>
+                      <Col>
+                        {frameWorks.map((item, index) => (
+                          <>
+                            {index > arrayDevide ? (
+                              <Form.Check
+                                key={index}
+                                id={item}
+                                label={item}
+                                value={item}
+                                {...register("selectedFramework", {
+                                  required: true,
+                                })}
+                              />
+                            ) : null}
+                          </>
+                        ))}
+                      </Col>
+                    </Row>
                   </div>
                 </Col>
               </Row>
 
-              <div className="mb-4">
+              <div className="bg-theme-light my-3">
                 <Form.Label>
                   {" "}
                   Choose Your Industry : (Pick 2 For Best Result ){" "}
@@ -401,7 +435,7 @@ function Home() {
                     remove the old data from <Link to="/db/result">here</Link>
                   </h5>
                 ) : (
-                  <Button type="submit" className="rt-btn-on">
+                  <Button type="submit" className="rt-btn-on mt-4">
                     Magic Checklist
                   </Button>
                 )}
