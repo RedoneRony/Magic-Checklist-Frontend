@@ -12,6 +12,14 @@ export const routes = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/viewPDF",
+    element: (
+      <PrivateRoute>
+        <PdfFile />
+      </PrivateRoute>
+    ),
+  },
+  {
     path: "/db",
     element: (
       <PrivateRoute>
@@ -43,14 +51,7 @@ export const routes = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/db/viewPDF",
-        element: (
-          <PrivateRoute>
-            <PdfFile />
-          </PrivateRoute>
-        ),
-      },
+      
       {
         path: "/db/download/all/user/",
         element: (

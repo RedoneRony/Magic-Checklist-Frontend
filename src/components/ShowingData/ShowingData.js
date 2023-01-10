@@ -191,7 +191,7 @@ function ShowingData () {
             <Col>
               <div className='mb-3'>
 
-              <Button onClick={() =>navigate('/db/viewPDF')} className='rt-btn-on mb-2'>
+              <Button onClick={() =>navigate('/viewPDF')} className='rt-btn-on mb-2'>
                   PDF View
                 </Button>
                 <Button onClick={deleteData} className='rt-btn'>
