@@ -27,7 +27,13 @@ const Result = ({
   question6,
   question7,
   question8,
+  seo1,
+  seo2,
+  seo3,
+  seo4,
+  seo5,
 }) => {
+  console.log("newdata", seo1, seo2, seo3, seo4, seo5);
   const navigate = useNavigate();
   const resGoal = goals[0]?.text;
   const resGoal1 = goals1[0]?.text;
@@ -66,6 +72,12 @@ const Result = ({
   const okr1Title = `Goals and Objective for ${userData?.agencyName} in Q1 2023:`;
   const okrYearTitle = `Goals and Objective for ${userData?.agencyName} in 2023:`;
 
+  const seoTitle1 = `SEO Basic Checklist For ${userData?.agencyName}:`;
+  const seoTitle2 = `Keyword Research Checklist For SEO For ${userData?.agencyName}:`;
+  const seoTitle3 = `Technical SEO Checklist For ${userData?.agencyName}:`;
+  const seoTitle4 = `On-page and content Checklist For ${userData?.agencyName}:`;
+  const seoTitle5 = `Off-page SEO Checklist For ${userData?.agencyName}:`;
+
   const handleSaveToDb = async () => {
     const response1 = await axios.post(
       `${process.env.REACT_APP_SITE_API}/api/bd/createBdList`,
@@ -84,12 +96,30 @@ const Result = ({
       `${process.env.REACT_APP_SITE_API}/api/marketing/createList`,
       {
         email: user?.email,
+
         marketingCheckListTitle,
         marketingCheckList: marketing[0].text,
+
         webDirectoriesTitle,
         webDirectories: marketing1[0].text,
+
         contentPlanTitle,
         contentPlan: marketing2[0].text,
+
+        seoTitle1,
+        basicChecklist: seo1[0].text,
+
+        seoTitle2,
+        keywordResearch: seo2[0].text,
+
+        seoTitle3,
+        technicalSEO: seo3[0].text,
+
+        seoTitle4,
+        onPage: seo4[0].text,
+
+        seoTitle5,
+        offPage: seo5[0].text,
       }
     );
     const response3 = await axios.post(
@@ -315,7 +345,7 @@ const Result = ({
                 marketing &&
                 marketing1 &&
                 marketing2 && (
-                  <Button onClick={handleSaveToDb} className="rt-btn-on mr-3">
+                  <Button onClick={handleSaveToDb} className="rt-btn mr-3">
                     Save
                   </Button>
                 )}

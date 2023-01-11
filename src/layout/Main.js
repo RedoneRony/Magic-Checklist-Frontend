@@ -36,7 +36,7 @@ export const Main = () => {
       <footer className="bg-light text-center text-lg-start">
         <div className="text-center p-3">
           ©{currentYear} Copyright
-          <Link to="https://managedcoder.com/"> Managedcoder</Link>
+          <a href="https://managedcoder.com/"> Managedcoder</a>
         </div>
       </footer>
     </>

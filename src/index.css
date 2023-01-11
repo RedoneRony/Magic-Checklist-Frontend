@@ -16,3 +16,9 @@ pre {
   white-space: pre-wrap;
 }
 
+.form-check-input {
+    width: 1.4em !important;
+    height: 1.2em !important;
+    margin-right: 8px !important;
+}
+
