@@ -16,6 +16,13 @@
    display: flex;
 }
 
+.pdf-footer{
+  background: rgba(42, 135, 143, 0.1);
+  border-top: 1px solid rgba(0, 116, 126, 0.5);
+  color:#2A878F;
+}
+
+
   @media print {
     /* html, body {
       width: 210mm;
