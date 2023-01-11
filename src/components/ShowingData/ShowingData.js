@@ -191,8 +191,8 @@ function ShowingData () {
             <Col>
               <div className='mb-3'>
 
-              <Button onClick={() =>navigate('/db/viewPDF')} className='rt-btn-on mb-2'>
-                  PDF View
+              <Button onClick={() =>navigate('/viewPDF')} className='rt-btn mb-2'>
+                  Print
                 </Button>
                 <Button onClick={deleteData} className='rt-btn'>
                   Delete & Regenerate

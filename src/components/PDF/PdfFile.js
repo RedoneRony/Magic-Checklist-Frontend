@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthProvider'
-import {  Col, Row, Spinner } from 'react-bootstrap'
+import { Col, Row, Spinner, Container, Navbar } from 'react-bootstrap'
 import ReactToPrint from 'react-to-print';
 import '../ShowingData/ShowingData.css';
 
@@ -29,8 +30,9 @@ function PdfFile() {
     const [okrYear, setOkrYear] = useState([])
     const [okrDataId, setOkrDataBd] = useState('')
     const navigate = useNavigate()
+    const currentYear = new Date().getFullYear();
 
- 
+
 
     function formatData(data) {
         // const res1 = data[0];
@@ -44,6 +46,8 @@ function PdfFile() {
         })
         return array
     }
+
+
 
     useEffect(() => {
         const getEmployeeEmails = async () => {
@@ -118,226 +122,253 @@ function PdfFile() {
     }, [!bdData, !mData, !okrData])
 
     return (
-        <>
-            <div className='mt-4 rt-showing-data'>
+        <div ref={inputRef}>
+            <Navbar className="rt-nav pdf-header">
+                <Container>
+                    <Navbar.Brand>
+                        <Link>
+                            <img src="/logo.png" alt="logo" className="brand-logo-pdf" />
+                        </Link>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                    <Navbar.Collapse className="justify-content-end">
+                        <Navbar.Text>
+                            <span className="header-text brand-color">Scale Up Your Agency with ManagedCoder Magic Checklist!</span>
+                        </Navbar.Text>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
 
-                <Row>
-                    <Col md={10}>
-                        <div className='mb-3'>
-                            <ReactToPrint
-                                trigger={() => <button className="rt-btn-on">Print PDF</button>}
-                                content={() => inputRef.current}
-                            />
+            <Container>
+                <div className='m-4 p-3 rt-showing-data'>
 
-                        </div>
-                    </Col>
-                    <Col>
-                        <button onClick={()=> navigate('/db/result')} className="rt-btn">Back</button>
-                    </Col>
-                    <Col sm={12} ref={inputRef}>
+                    <Row>
+                            <div className="showButton">
+                                <Col md={12} className="d-flex justify-content-between mb-4">
+                                        <ReactToPrint
+                                            trigger={() => <button className="rt-btn-on">Print PDF</button>}
+                                            content={() => inputRef.current}
+                                            // onBeforePrint={()=>showPrint=false}
+                                           
+                                        />
+                                        <button onClick={() => navigate('/db/result')} className="rt-btn">Back</button>
 
-                        {bdData && mData && okrData ? (
-                            <>
-                                <h4 className='rt-result-hading brand-color p-4'>
-                                    {bdFullData?.bdCheckListTitle}
-                                </h4>
-                                <div className='mb-4 p-4'>
-                                    {bdData ? (
-                                        bdData?.slice(0, 20).map((item, index) => (
-                                            <>
-                                                <p key={index}>{item}</p>
-                                            </>
-                                        ))
-                                    ) : (
-                                        <h4>
-                                            Calculating...
-                                            <Spinner
-                                                as='span'
-                                                animation='border'
-                                                size='sm'
-                                                role='status'
-                                                aria-hidden='true'
-                                            />
-                                        </h4>
-                                    )}
-                                </div>
-                                <h4 className='rt-result-hading brand-color p-4'>
-                                    {bdFullData?.salesActivityTitle}
-                                </h4>
-                                <div className='mb-4 p-4'>
-                                    {salesActivity ? (
-                                        salesActivity?.slice(0, 5).map((item, index) => (
-                                            <>
-                                                <p key={index}>{item}</p>
-                                            </>
-                                        ))
-                                    ) : (
-                                        <h4>
-                                            Calculating...
-                                            <Spinner
-                                                as='span'
-                                                animation='border'
-                                                size='sm'
-                                                role='status'
-                                                aria-hidden='true'
-                                            />
-                                        </h4>
-                                    )}
-                                </div>
-                                <h4 className='rt-result-hading brand-color p-4'>
-                                    {bdFullData?.marketPlaceTitle}
-                                </h4>
-                                <div className='mb-4 p-4'>
-                                    {marketPlace ? (
-                                        marketPlace?.map((item, index) => (
-                                            <>
-                                                <p key={index}>{item}</p>
-                                            </>
-                                        ))
-                                    ) : (
-                                        <h4>
-                                            Calculating...
-                                            <Spinner
-                                                as='span'
-                                                animation='border'
-                                                size='sm'
-                                                role='status'
-                                                aria-hidden='true'
-                                            />
-                                        </h4>
-                                    )}
-                                </div>
-                                <h4 className='rt-result-hading brand-color p-4'>
-                                    {mDataFull?.marketingCheckListTitle}
-                                </h4>
-                                <div className='mb-4 p-4'>
-                                    {mData ? (
-                                        mData?.map((item, index) => (
-                                            <>
-                                                <p key={index}>{item}</p>
-                                            </>
-                                        ))
-                                    ) : (
-                                        <h4>
-                                            Calculating...
-                                            <Spinner
-                                                as='span'
-                                                animation='border'
-                                                size='sm'
-                                                role='status'
-                                                aria-hidden='true'
-                                            />
-                                        </h4>
-                                    )}
-                                </div>
-                                <h4 className='rt-result-hading brand-color p-4'>
-                                    {mDataFull.webDirectoriesTitle}
-                                </h4>
-                                <div className='mb-4 p-4'>
-                                    {webDirectories ? (
-                                        webDirectories?.map((item, index) => (
-                                            <>
-                                                <p key={index}>{item}</p>
-                                            </>
-                                        ))
-                                    ) : (
-                                        <h4>
-                                            Calculating...
-                                            <Spinner
-                                                as='span'
-                                                animation='border'
-                                                size='sm'
-                                                role='status'
-                                                aria-hidden='true'
-                                            />
-                                        </h4>
-                                    )}
-                                </div>
+                                </Col>
+                            </div>
+
+                        <Col sm={12}>
+
+                            {bdData && mData && okrData ? (
+                                <>
+                                    <h4 className='rt-result-hading brand-color p-4'>
+                                        {bdFullData?.bdCheckListTitle}
+                                    </h4>
+                                    <div className='mb-4 p-4'>
+                                        {bdData ? (
+                                            bdData?.slice(0, 20).map((item, index) => (
+                                                <>
+                                                    <p key={index}>{item}</p>
+                                                </>
+                                            ))
+                                        ) : (
+                                            <h4>
+                                                Calculating...
+                                                <Spinner
+                                                    as='span'
+                                                    animation='border'
+                                                    size='sm'
+                                                    role='status'
+                                                    aria-hidden='true'
+                                                />
+                                            </h4>
+                                        )}
+                                    </div>
+                                    <h4 className='rt-result-hading brand-color p-4'>
+                                        {bdFullData?.salesActivityTitle}
+                                    </h4>
+                                    <div className='mb-4 p-4'>
+                                        {salesActivity ? (
+                                            salesActivity?.slice(0, 5).map((item, index) => (
+                                                <>
+                                                    <p key={index}>{item}</p>
+                                                </>
+                                            ))
+                                        ) : (
+                                            <h4>
+                                                Calculating...
+                                                <Spinner
+                                                    as='span'
+                                                    animation='border'
+                                                    size='sm'
+                                                    role='status'
+                                                    aria-hidden='true'
+                                                />
+                                            </h4>
+                                        )}
+                                    </div>
+                                    <h4 className='rt-result-hading brand-color p-4'>
+                                        {bdFullData?.marketPlaceTitle}
+                                    </h4>
+                                    <div className='mb-4 p-4'>
+                                        {marketPlace ? (
+                                            marketPlace?.map((item, index) => (
+                                                <>
+                                                    <p key={index}>{item}</p>
+                                                </>
+                                            ))
+                                        ) : (
+                                            <h4>
+                                                Calculating...
+                                                <Spinner
+                                                    as='span'
+                                                    animation='border'
+                                                    size='sm'
+                                                    role='status'
+                                                    aria-hidden='true'
+                                                />
+                                            </h4>
+                                        )}
+                                    </div>
+                                    <h4 className='rt-result-hading brand-color p-4'>
+                                        {mDataFull?.marketingCheckListTitle}
+                                    </h4>
+                                    <div className='mb-4 p-4'>
+                                        {mData ? (
+                                            mData?.map((item, index) => (
+                                                <>
+                                                    <p key={index}>{item}</p>
+                                                </>
+                                            ))
+                                        ) : (
+                                            <h4>
+                                                Calculating...
+                                                <Spinner
+                                                    as='span'
+                                                    animation='border'
+                                                    size='sm'
+                                                    role='status'
+                                                    aria-hidden='true'
+                                                />
+                                            </h4>
+                                        )}
+                                    </div>
+                                    <h4 className='rt-result-hading brand-color p-4'>
+                                        {mDataFull.webDirectoriesTitle}
+                                    </h4>
+                                    <div className='mb-4 p-4'>
+                                        {webDirectories ? (
+                                            webDirectories?.map((item, index) => (
+                                                <>
+                                                    <p key={index}>{item}</p>
+                                                </>
+                                            ))
+                                        ) : (
+                                            <h4>
+                                                Calculating...
+                                                <Spinner
+                                                    as='span'
+                                                    animation='border'
+                                                    size='sm'
+                                                    role='status'
+                                                    aria-hidden='true'
+                                                />
+                                            </h4>
+                                        )}
+                                    </div>
                                     <h4 className='rt-result-hading brand-color p-4'>
                                         {mDataFull.contentPlanTitle}
                                     </h4>
                                     <div className='mb-4 p-4'>
-                                    {contentPlan ? (
-                                        contentPlan?.map((item, index) => (
-                                            <>
-                                                <p key={index}>{item}</p>
-                                            </>
-                                        ))
-                                    ) : (
-                                        <h4>
-                                            Calculating...
-                                            <Spinner
-                                                as='span'
-                                                animation='border'
-                                                size='sm'
-                                                role='status'
-                                                aria-hidden='true'
-                                            />
-                                        </h4>
-                                    )}
-                                </div>
-                                        
+                                        {contentPlan ? (
+                                            contentPlan?.map((item, index) => (
+                                                <>
+                                                    <p key={index}>{item}</p>
+                                                </>
+                                            ))
+                                        ) : (
+                                            <h4>
+                                                Calculating...
+                                                <Spinner
+                                                    as='span'
+                                                    animation='border'
+                                                    size='sm'
+                                                    role='status'
+                                                    aria-hidden='true'
+                                                />
+                                            </h4>
+                                        )}
+                                    </div>
 
-                                <h4 className='rt-result-hading brand-color p-4'>
-                                    {okrDataFull.okr1Title}
-                                </h4>
-                                <div className='mb-4 p-4'>
-                                    {okrQ1 ? (
-                                        okrQ1?.map((item, index) => (
-                                            <>
-                                                <p key={index}>{item}</p>
-                                            </>
-                                        ))
-                                    ) : (
-                                        <h4>
-                                            Calculating...
-                                            <Spinner
-                                                as='span'
-                                                animation='border'
-                                                size='sm'
-                                                role='status'
-                                                aria-hidden='true'
-                                            />
-                                        </h4>
-                                    )}
-                                </div>
-                                 
-                                <h4 className='rt-result-hading brand-color p-4'>
-                                    {okrDataFull.okrYearTitle}
-                                </h4>
 
-                                <div className='mb-4 p-4'>
-                                    {okrYear ? (
-                                        okrYear?.map((item, index) => (
-                                            <>
-                                                <p key={index}>{item}</p>
-                                            </>
-                                        ))
-                                    ) : (
-                                        <h4>
-                                            Calculating...
-                                            <Spinner
-                                                as='span'
-                                                animation='border'
-                                                size='sm'
-                                                role='status'
-                                                aria-hidden='true'
-                                            />
-                                        </h4>
-                                    )}
-                                </div>
+                                    <h4 className='rt-result-hading brand-color p-4'>
+                                        {okrDataFull.okr1Title}
+                                    </h4>
+                                    <div className='mb-4 p-4'>
+                                        {okrQ1 ? (
+                                            okrQ1?.map((item, index) => (
+                                                <>
+                                                    <p key={index}>{item}</p>
+                                                </>
+                                            ))
+                                        ) : (
+                                            <h4>
+                                                Calculating...
+                                                <Spinner
+                                                    as='span'
+                                                    animation='border'
+                                                    size='sm'
+                                                    role='status'
+                                                    aria-hidden='true'
+                                                />
+                                            </h4>
+                                        )}
+                                    </div>
 
-                            </>
-                        ) : (
-                            <h5>
-                                Please <Link to='/db/home'>Generate</Link> your Magic
-                                Checklist First
-                            </h5>
-                        )}
-                    </Col>
-                </Row>
-            </div>
-        </>
+                                    <h4 className='rt-result-hading brand-color p-4'>
+                                        {okrDataFull.okrYearTitle}
+                                    </h4>
+
+                                    <div className='mb-4 p-4'>
+                                        {okrYear ? (
+                                            okrYear?.map((item, index) => (
+                                                <>
+                                                    <p key={index}>{item}</p>
+                                                </>
+                                            ))
+                                        ) : (
+                                            <h4>
+                                                Calculating...
+                                                <Spinner
+                                                    as='span'
+                                                    animation='border'
+                                                    size='sm'
+                                                    role='status'
+                                                    aria-hidden='true'
+                                                />
+                                            </h4>
+                                        )}
+                                    </div>
+
+                                </>
+                            ) : (
+                                <h5>
+                                    Please <Link to='/db/home'>Generate</Link> your Magic
+                                    Checklist First
+                                </h5>
+                            )}
+                        </Col>
+                    </Row>
+                </div>
+            </Container>
+            <footer className="pdf-footer text-center text-lg-start">
+                <div className="text-center p-3">
+                    ©{currentYear}
+                    <a href="https://managedcoder.com/" className='brand-color' target="_blank"> ManagedCoder</a>
+                    . All Rights Reserved.
+                </div>
+            </footer>
+        </div>
+
     )
 }
 

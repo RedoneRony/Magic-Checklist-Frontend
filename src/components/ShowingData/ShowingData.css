@@ -12,15 +12,25 @@
     font-size: 16px !important;
     margin-left: 25px !important;
 }
+.showButton{
+   display: flex;
+}
 
-@page {
-    size: A4;
-    margin:  60px;
-  }
-  /* @media print {
-    html, body {
+  @media print {
+    /* html, body {
       width: 210mm;
-      height: 297mm;
+      height: 400mm;
       margin: 40px;
+    } */
+    .rt-showing-data{
+      min-height: 100;
     }
-    }   */
+    .showButton{
+      display: none;
+    }
+    @page {
+      size: A4;
+      margin: 40px 0px;
+      min-height: 100%;
+    }
+  }  

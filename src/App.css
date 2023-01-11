@@ -45,3 +45,23 @@
 .rtn-question-title{
     color: #fff;
 }
+.pdf-footer{
+    color: #2A878F;
+    background: rgba(42, 135, 143, 0.1);
+    border-top: 1px solid rgba(0, 116, 126, 0.5);
+    /* position: fixed;
+    bottom: 0; */
+    width: 100%;
+    padding: 0.1% 0.1%;
+}
+.pdf-header{
+    background: rgba(42, 135, 143, 0.1);
+}
+.brand-logo-pdf{
+    width: 237.78px;
+    height: 60px;
+}
+.header-text{
+font-size: 18px;
+font-weight: 500;
+}
