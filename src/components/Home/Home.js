@@ -9,6 +9,7 @@ import "./Home.css";
 import Result from "../Result/Result";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { FaMagic } from "react-icons/fa";
 
 const { Configuration, OpenAIApi } = require("openai");
 
@@ -27,13 +28,17 @@ function Home() {
   const [marketing, setMarketing] = useState([]);
   const [marketing1, setMarketing1] = useState([]);
   const [marketing2, setMarketing2] = useState([]);
+  const [seo1, setSeo1] = useState([]);
+  const [seo2, setSeo2] = useState([]);
+  const [seo3, setSeo3] = useState([]);
+  const [seo4, setSeo4] = useState([]);
+  const [seo5, setSeo5] = useState([]);
   const [goals, setGoals] = useState([]);
   const [goals1, setGoals1] = useState([]);
   const [service, setService] = useState("");
   const [framework, setFramework] = useState("");
   const [dbInfo, setDbInfo] = useState("");
   const [arrayDevide, setArrayDevide] = useState("");
-  console.log("Chat GPT");
   const [isLoading, setLoading] = useState(false);
 
   // storing questions
@@ -154,9 +159,9 @@ function Home() {
 
     const completion6 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write me a 6 months Content plan in numbered format for ${data?.selectedServices?.toString()} Agency writing about ${
+      prompt: `Write me a monthly Content plan for ${data?.selectedServices?.toString()} Agency writing about ${
         framework === "Others" ? "Web application framework" : framework
-      }`,
+      } for 6 months in 6 key points`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -164,20 +169,60 @@ function Home() {
 
     const completion7 = await openai.createCompletion({
       model: "text-davinci-003",
+      prompt: `SEO Basic Checklist for ${data?.selectedServices?.toString()}  Agency in 6 points`,
+      max_tokens: 1500,
+      temperature: 1,
+    });
+    setSeo1(completion7?.data?.choices);
+
+    const completion8 = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `Keyword Research Checklist For SEO ${data?.selectedServices?.toString()}  Agency in 6 points`,
+      max_tokens: 1500,
+      temperature: 1,
+    });
+    setSeo2(completion8?.data?.choices);
+
+    const completion9 = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `Technical SEO Checklist ${data?.selectedServices?.toString()}  Agency in 6 points`,
+      max_tokens: 1500,
+      temperature: 1,
+    });
+    setSeo3(completion9?.data?.choices);
+
+    const completion10 = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `On-page and content Checklist ${data?.selectedServices?.toString()}  Agency in 6 points`,
+      max_tokens: 1500,
+      temperature: 1,
+    });
+    setSeo4(completion10?.data?.choices);
+
+    const completion11 = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `Off-page SEO Checklist ${data?.selectedServices?.toString()}  Agency in 6 points`,
+      max_tokens: 1500,
+      temperature: 1,
+    });
+    setSeo5(completion11?.data?.choices);
+
+    const completion12 = await openai.createCompletion({
+      model: "text-davinci-003",
       prompt: `3 sample okr for ${data?.agencySize?.toString()} web development agency For Q1 to get more leads and warm leads for ${data?.selectedIndustry?.toString()}`,
       max_tokens: 1500,
       temperature: 1,
     });
 
-    setGoals(completion7?.data?.choices);
+    setGoals(completion12?.data?.choices);
 
-    const completion8 = await openai.createCompletion({
+    const completion13 = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `3 sample okr for year 2023 ${data?.selectedServices?.toString()} agency niching industry ${data?.selectedIndustry?.toString()}`,
       max_tokens: 1500,
       temperature: 1,
     });
-    setGoals1(completion8?.data?.choices);
+    setGoals1(completion13?.data?.choices);
 
     setLoading(false);
     reset();
@@ -436,7 +481,7 @@ function Home() {
                   </h5>
                 ) : (
                   <Button type="submit" className="rt-btn-on mt-4">
-                    Magic Checklist
+                    <FaMagic /> Magic Checklist
                   </Button>
                 )}
               </div>
@@ -464,6 +509,11 @@ function Home() {
           question6={question6}
           question7={question7}
           question8={question8}
+          seo1={seo1}
+          seo2={seo2}
+          seo3={seo3}
+          seo4={seo4}
+          seo5={seo5}
         ></Result>
       )}
     </div>
