@@ -6,6 +6,7 @@ import ShowingData from "../components/ShowingData/ShowingData";
 import { Main } from "../layout/Main";
 import PrivateRoute from "./PrivateRoute";
 import PdfFile from './../components/PDF/PdfFile';
+// import PdfTemplate from './../components/PDF/PdfTemplate';
 export const routes = createBrowserRouter([
   {
     path: "/",

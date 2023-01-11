@@ -47,6 +47,8 @@ function PdfFile() {
         return array
     }
 
+
+
     useEffect(() => {
         const getEmployeeEmails = async () => {
             // business data
@@ -141,18 +143,19 @@ function PdfFile() {
                 <div className='m-4 p-3 rt-showing-data'>
 
                     <Row>
-                        <Col md={10}>
-                            <div className='mb-3'>
-                                <ReactToPrint
-                                    trigger={() => <button className="rt-btn-on">Print PDF</button>}
-                                    content={() => inputRef.current}
-                                />
+                            <div className="showButton">
+                                <Col md={12} className="d-flex justify-content-between mb-4">
+                                        <ReactToPrint
+                                            trigger={() => <button className="rt-btn-on">Print PDF</button>}
+                                            content={() => inputRef.current}
+                                            // onBeforePrint={()=>showPrint=false}
+                                           
+                                        />
+                                        <button onClick={() => navigate('/db/result')} className="rt-btn">Back</button>
 
+                                </Col>
                             </div>
-                        </Col>
-                        <Col>
-                            <button onClick={() => navigate('/db/result')} className="rt-btn">Back</button>
-                        </Col>
+
                         <Col sm={12}>
 
                             {bdData && mData && okrData ? (

@@ -12,9 +12,9 @@
     font-size: 16px !important;
     margin-left: 25px !important;
 }
-
-
-  
+.showButton{
+   display: flex;
+}
 
   @media print {
     /* html, body {
@@ -24,6 +24,9 @@
     } */
     .rt-showing-data{
       min-height: 100;
+    }
+    .showButton{
+      display: none;
     }
     @page {
       size: A4;
