@@ -37,6 +37,7 @@ function Home() {
   const [goals1, setGoals1] = useState([]);
   const [service, setService] = useState("");
   const [framework, setFramework] = useState("");
+  console.log(framework);
   const [dbInfo, setDbInfo] = useState("");
   const [arrayDevide, setArrayDevide] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -50,7 +51,7 @@ function Home() {
   const [question6, setQuestion6] = useState("");
   const [question7, setQuestion7] = useState("");
   const [question8, setQuestion8] = useState("");
-
+  console.log(question6, framework);
   const { register, handleSubmit, reset } = useForm();
   // country options
   const options = useMemo(() => countryList().getData(), []);
@@ -77,40 +78,44 @@ function Home() {
   };
 
   const onSubmit = async (data) => {
+    console.log(data);
     setUserData(data);
     setService(data?.selectedServices?.toString());
     setFramework(data?.selectedFramework?.toString());
     setLoading(true);
+
+    // framwork store variable
+    const webFramework = data?.selectedFramework?.toString();
 
     // store user other information to db
     insertOtherInformationToDb(data);
 
     // storing data to the state
     setQuestion1(
-      `Write 21 points on business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency`
+      `Write 21 points on business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency:`
     );
     setQuestion2(
-      `Write 6 types of sales activities that a ${data?.selectedServices?.toString()} agency can do`
+      `Write 6 types of sales activities that a ${data?.selectedServices?.toString()} agency can do:`
     );
     setQuestion3(
-      `List of 5 market place ${data?.selectedServices?.toString()} agency can find work with link to those website. Do not include Linkedin`
+      `List of 5 market place ${data?.selectedServices?.toString()} agency can find work with link to those website. Do not include Linkedin:`
     );
     setQuestion4(
       `Write 10 points on how an ${
-        framework === "Others" ? "Web application framework" : framework
+        webFramework === "Others" ? "Web application framework" : webFramework
       } agency can make a marketing plan for their business:`
     );
     setQuestion5(
-      `Write  5  points ${framework} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`
+      `Write  5  points ${webFramework} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot:`
     );
     setQuestion6(
-      `Write me a 6 months Content plan in numbered format for ${data?.selectedServices?.toString()} Agency writing about ${framework}`
+      `Write me a 6 months Content plan in numbered format for ${data?.selectedServices?.toString()} Agency writing about ${webFramework}:`
     );
     setQuestion7(
-      `3 sample okr for ${data?.agencySize?.toString()} web development agency For Q1 to get more leads and warm leads for ${data?.selectedIndustry?.toString()}`
+      `3 sample okr for ${data?.agencySize?.toString()} web development agency For Q1 to get more leads and warm leads for ${data?.selectedIndustry?.toString()}:`
     );
     setQuestion8(
-      `3 sample okr for year 2023 ${data?.selectedServices?.toString()} agency niching industry ${data?.selectedIndustry?.toString()}`
+      `3 sample okr for year 2023 ${data?.selectedServices?.toString()} agency niching industry ${data?.selectedIndustry?.toString()}:`
     );
 
     const completion = await openai.createCompletion({
@@ -193,7 +198,7 @@ function Home() {
 
     const completion10 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `On-page and content Checklist ${data?.selectedServices?.toString()}  Agency in 6 points`,
+      prompt: `On-page SEO and content Checklist ${data?.selectedServices?.toString()}  Agency in 6 points`,
       max_tokens: 1500,
       temperature: 1,
     });

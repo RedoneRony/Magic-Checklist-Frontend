@@ -33,7 +33,7 @@ const Result = ({
   seo4,
   seo5,
 }) => {
-  console.log("newdata", seo1, seo2, seo3, seo4, seo5);
+  console.log("Framework", question6);
   const navigate = useNavigate();
   const resGoal = goals[0]?.text;
   const resGoal1 = goals1[0]?.text;
@@ -75,9 +75,8 @@ const Result = ({
   const seoTitle1 = `SEO Basic Checklist For ${userData?.agencyName}:`;
   const seoTitle2 = `Keyword Research Checklist For SEO For ${userData?.agencyName}:`;
   const seoTitle3 = `Technical SEO Checklist For ${userData?.agencyName}:`;
-  const seoTitle4 = `On-page and content Checklist For ${userData?.agencyName}:`;
+  const seoTitle4 = `On-page SEO and content Checklist For ${userData?.agencyName}:`;
   const seoTitle5 = `Off-page SEO Checklist For ${userData?.agencyName}:`;
-
   const handleSaveToDb = async () => {
     const response1 = await axios.post(
       `${process.env.REACT_APP_SITE_API}/api/bd/createBdList`,
