@@ -143,18 +143,18 @@ function PdfFile() {
                 <div className='m-4 p-3 rt-showing-data'>
 
                     <Row>
-                            <div className="showButton">
-                                <Col md={12} className="d-flex justify-content-between mb-4">
-                                        <ReactToPrint
-                                            trigger={() => <button className="rt-btn-on">Print PDF</button>}
-                                            content={() => inputRef.current}
-                                            // onBeforePrint={()=>showPrint=false}
-                                           
-                                        />
-                                        <button onClick={() => navigate('/db/result')} className="rt-btn">Back</button>
+                        <div className="showButton">
+                            <Col md={12} className="d-flex justify-content-between mb-4">
+                                <ReactToPrint
+                                    trigger={() => <button className="rt-btn-on">Print PDF</button>}
+                                    content={() => inputRef.current}
+                                // onBeforePrint={()=>showPrint=false}
 
-                                </Col>
-                            </div>
+                                />
+                                <button onClick={() => navigate('/db/result')} className="rt-btn">Back</button>
+
+                            </Col>
+                        </div>
 
                         <Col sm={12}>
 
@@ -298,7 +298,31 @@ function PdfFile() {
                                             </h4>
                                         )}
                                     </div>
+                                     
+                                    <h4 className="rt-result-hading brand-color p-4">
+                                        {mDataFull?.seoTitle1}
+                                    </h4>
+                                    <pre>{mDataFull?.basicChecklist}</pre>
 
+                                    <h4 className="rt-result-hading brand-color p-4">
+                                        {mDataFull?.seoTitle2}
+                                    </h4>
+                                    <pre>{mDataFull?.keywordResearch}</pre>
+
+                                    <h4 className="rt-result-hading brand-color p-4">
+                                        {mDataFull?.seoTitle3}
+                                    </h4>
+                                    <pre>{mDataFull?.technicalSEO}</pre>
+
+                                    <h4 className="rt-result-hading brand-color p-4">
+                                        {mDataFull?.seoTitle4}
+                                    </h4>
+                                    <pre>{mDataFull?.onPage}</pre>
+
+                                    <h4 className="rt-result-hading brand-color p-4">
+                                        {mDataFull?.seoTitle5}
+                                    </h4>
+                                    <pre>{mDataFull?.offPage}</pre>
 
                                     <h4 className='rt-result-hading brand-color p-4'>
                                         {okrDataFull.okr1Title}
@@ -324,8 +348,9 @@ function PdfFile() {
                                         )}
                                     </div>
 
+                                  
                                     <h4 className='rt-result-hading brand-color p-4'>
-                                        {okrDataFull.okrYearTitle}
+                                      {okrDataFull.okrYearTitle}
                                     </h4>
 
                                     <div className='mb-4 p-4'>
