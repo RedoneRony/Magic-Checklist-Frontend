@@ -109,7 +109,7 @@ function Home() {
       `Write  5  points ${webFramework} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot:`
     );
     setQuestion6(
-      `Write me a 6 months Content plan in numbered format for ${data?.selectedServices?.toString()} Agency writing about ${webFramework}:`
+      `Write me a monthly Content plan for ${data?.selectedServices?.toString()} Agency writing about ${webFramework} for 6 months in 6 key points:`
     );
     setQuestion7(
       `3 sample okr for ${data?.agencySize?.toString()} web development agency For Q1 to get more leads and warm leads for ${data?.selectedIndustry?.toString()}:`
