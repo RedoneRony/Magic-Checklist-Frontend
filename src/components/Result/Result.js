@@ -32,6 +32,7 @@ const Result = ({
   seo3,
   seo4,
   seo5,
+  agencySize,
 }) => {
   console.log("Framework", question6);
   const navigate = useNavigate();
@@ -58,12 +59,12 @@ const Result = ({
   const formatedBdData = bdData[0]?.text.split(/\d+\./);
   const formatedBdData1 = bdData1[0]?.text.split(/\d+\./);
   const formatedMarketing = formatData(marketing);
-  const formatedMarketing1 = marketing1[0]?.text.split(/\d+\./);
+  const formatedMarketing1 = formatData(marketing1);
   const formatedBdData2 = formatMarketingData2(bdData2);
 
   const bdCheckListTitle = `Business development Checklist For ${userData?.agencyName} in 2023:`;
-  const salesActivityTitle = `5 Type of Sales Activity ${userData?.agencyName} to do to get more Business in 2023:`;
-  const marketPlaceTitle = `Here are five marketplaces where  ${service} agency can find work:`;
+  const salesActivityTitle = `5 Types of Sales Activity ${userData?.agencyName} to do to get more Business in 2023:`;
+  const marketPlaceTitle = `Here are marketplaces where  ${service} agency can find work:`;
   const marketingCheckListTitle = `Marketing Checklist For ${userData?.agencyName} in 2023:`;
   const webDirectoriesTitle = `Here are five web directories where a software agency can list their website, and get client review done:`;
   const contentPlanTitle = `Here is a suggested 6-month content plan for a ${service} agency writing about ${
@@ -226,10 +227,9 @@ const Result = ({
                     <Form.Label>{marketingCheckListTitle}</Form.Label>
                     {formatedMarketing ? (
                       formatedMarketing?.slice(1, 11).map((item, index) => (
-                        <p key={index}>
-                          {" "}
+                        <pre key={index}>
                           {index + 1}.{item}
-                        </p>
+                        </pre>
                       ))
                     ) : (
                       <h4>
@@ -249,10 +249,8 @@ const Result = ({
                     <h6 className="rtn-question-title">{question5}</h6>
                     <Form.Label>{webDirectoriesTitle}</Form.Label>
                     {formatedMarketing1 ? (
-                      formatedMarketing1?.slice(1, 6)?.map((item, index) => (
-                        <p key={index}>
-                          {index + 1}.{item}
-                        </p>
+                      formatedMarketing1?.map((item, index) => (
+                        <pre key={index}>{item}</pre>
                       ))
                     ) : (
                       <h4>

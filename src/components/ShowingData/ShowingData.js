@@ -236,7 +236,7 @@ function ShowingData() {
                       </h4>
                       <div className="mb-4 p-4">
                         {salesActivity ? (
-                          salesActivity?.slice(0, 5).map((item, index) => (
+                          salesActivity?.slice(0, 6).map((item, index) => (
                             <>
                               <p key={index}>{item}</p>
                             </>

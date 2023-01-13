@@ -21,23 +21,29 @@ function Home() {
 
   const openai = new OpenAIApi(configuration);
 
+  const [userData, setUserData] = useState([]);
+
   const [bdData, setBdData] = useState([]);
   const [bdData1, setBdData1] = useState([]);
   const [bdData2, setBdData2] = useState([]);
-  const [userData, setUserData] = useState([]);
+
   const [marketing, setMarketing] = useState([]);
   const [marketing1, setMarketing1] = useState([]);
   const [marketing2, setMarketing2] = useState([]);
+
   const [seo1, setSeo1] = useState([]);
   const [seo2, setSeo2] = useState([]);
   const [seo3, setSeo3] = useState([]);
   const [seo4, setSeo4] = useState([]);
   const [seo5, setSeo5] = useState([]);
+
   const [goals, setGoals] = useState([]);
   const [goals1, setGoals1] = useState([]);
+
   const [service, setService] = useState("");
   const [framework, setFramework] = useState("");
-  console.log(framework);
+  const [agencySize, setAgencySize] = useState("");
+
   const [dbInfo, setDbInfo] = useState("");
   const [arrayDevide, setArrayDevide] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -51,8 +57,9 @@ function Home() {
   const [question6, setQuestion6] = useState("");
   const [question7, setQuestion7] = useState("");
   const [question8, setQuestion8] = useState("");
-  console.log(question6, framework);
+
   const { register, handleSubmit, reset } = useForm();
+
   // country options
   const options = useMemo(() => countryList().getData(), []);
 
@@ -62,6 +69,7 @@ function Home() {
       agencyName: data.agencyName,
       agencySize: data.agencySize,
       location: data.agencyLocation,
+      targetCustomerLocation: data.targetCustomerLocation,
     };
 
     await axios
@@ -78,10 +86,10 @@ function Home() {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
     setUserData(data);
     setService(data?.selectedServices?.toString());
     setFramework(data?.selectedFramework?.toString());
+    setAgencySize(data?.agencySize?.toString());
     setLoading(true);
 
     // framwork store variable
@@ -92,27 +100,29 @@ function Home() {
 
     // storing data to the state
     setQuestion1(
-      `Write 21 points on business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency:`
+      `Write 21 business development Activity ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} agency should do to get new clients on ${data?.selectedIndustry?.toString()} Industry:`
     );
     setQuestion2(
-      `Write 6 types of sales activities that a ${data?.selectedServices?.toString()} agency can do:`
+      `Here are five types of sales activities that a ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} agency can do on ${data?.selectedIndustry?.toString()} Industry:`
     );
     setQuestion3(
-      `List of 5 market place ${data?.selectedServices?.toString()} agency can find work with link to those website. Do not include Linkedin:`
+      `5 market place ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} agency can find work for ${webFramework} with link to those website . Do not include Linkedin:`
     );
     setQuestion4(
-      `Write 10 points on how an ${
-        webFramework === "Others" ? "Web application framework" : webFramework
-      } agency can make a marketing plan for their business:`
+      `Write 11 bullet points on how an ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} agency can make a marketing plan for their   
+       business if they use ${
+         webFramework === "Others" ? "Web application framework" : webFramework
+       } and target client is ${data?.selectedIndustry?.toString()}:`
     );
     setQuestion5(
-      `Write  5  points ${webFramework} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot:`
+      `Write 5 bullet points list ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot:`
     );
     setQuestion6(
-      `Write me a monthly Content plan for ${data?.selectedServices?.toString()} Agency writing about ${webFramework} for 6 months in 6 key points:`
+      `Write me a 6 months Content plan for ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} Agency writing about ${webFramework} targeting ${data?.selectedIndustry?.toString()} client:`
     );
     setQuestion7(
-      `3 sample okr for ${data?.agencySize?.toString()} web development agency For Q1 to get more leads and warm leads for ${data?.selectedIndustry?.toString()}:`
+      `3 sample okr for ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} agency For Q1 to get more leads and warm leads for 
+       ${data?.selectedIndustry?.toString()} doing ${webFramework}:`
     );
     setQuestion8(
       `3 sample okr for year 2023 ${data?.selectedServices?.toString()} agency niching industry ${data?.selectedIndustry?.toString()}:`
@@ -120,23 +130,25 @@ function Home() {
 
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write 21 points on business development Activity a ${data?.selectedServices?.toString()} agency should do to get new clients for agency`,
+      prompt: `Write 21 business development Activity ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} agency should do to get new clients on ${data?.selectedIndustry?.toString()} Industry`,
       max_tokens: 1500,
       temperature: 1,
     });
+
     setBdData(completion?.data?.choices);
 
     const completion2 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write 6 types of sales activities that a ${data?.selectedServices?.toString()} agency can do`,
+      prompt: `Here are five types of sales activities that a ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} agency can do on ${data?.selectedIndustry?.toString()} Industry`,
       max_tokens: 1500,
       temperature: 1,
     });
+
     setBdData1(completion2?.data?.choices);
 
     const completion3 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `List of 5 market place ${data?.selectedServices?.toString()} agency can find work with link to those website. Do not include Linkedin`,
+      prompt: `5 market place ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} agency can find work for ${webFramework} with link to those website. Do not include Linkedin`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -144,9 +156,11 @@ function Home() {
 
     const completion4 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write 10 points on how an ${
-        framework === "Others" ? "Web application framework" : framework
-      } agency can make a marketing plan for their business:`,
+      prompt: `Write 11 bullet points on how an ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} agency can make a marketing plan for their   
+       business if they use ${
+         webFramework === "Others" ? "Web application framework" : webFramework
+       } and target client is ${data?.selectedIndustry?.toString()}`,
+
       max_tokens: 1500,
       temperature: 1,
     });
@@ -154,9 +168,7 @@ function Home() {
 
     const completion5 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write  5  points ${
-        framework === "Others" ? "Web application framework" : framework
-      } agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`,
+      prompt: `Write 5 bullet points list ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} agency where they can submit their business to collect reviews and get new business including Clutch, Goodfirms, Google, Upcity, trustpilot`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -164,9 +176,7 @@ function Home() {
 
     const completion6 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Write me a monthly Content plan for ${data?.selectedServices?.toString()} Agency writing about ${
-        framework === "Others" ? "Web application framework" : framework
-      } for 6 months in 6 key points`,
+      prompt: `Write me a 6 months Content plan for ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} Agency writing about ${webFramework} targeting ${data?.selectedIndustry?.toString()} client`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -214,7 +224,8 @@ function Home() {
 
     const completion12 = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `3 sample okr for ${data?.agencySize?.toString()} web development agency For Q1 to get more leads and warm leads for ${data?.selectedIndustry?.toString()}`,
+      prompt: `3 sample okr for ${data?.agencySize?.toString()} ${data?.selectedServices?.toString()} agency For Q1 to get more leads and warm leads for 
+       ${data?.selectedIndustry?.toString()} doing ${webFramework}`,
       max_tokens: 1500,
       temperature: 1,
     });
@@ -265,6 +276,7 @@ function Home() {
     "Ruby on Rails",
     "Vue.js",
     "GoHighLevel",
+    "Custom Coding",
     "Others",
   ];
 
@@ -295,9 +307,8 @@ function Home() {
     "Other Industries",
   ];
 
-  console.log();
   const devideMe = (arr) => {
-    setArrayDevide(Math.ceil((arr.length - 1) / 2));
+    setArrayDevide(Math.floor((arr.length - 1) / 2));
   };
 
   useEffect(() => {
@@ -341,7 +352,7 @@ function Home() {
               <Row>
                 <Col>
                   <Form.Group
-                    className="mb-4"
+                    className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
                     <Form.Label>Agencey Name:</Form.Label>
@@ -354,7 +365,7 @@ function Home() {
                 </Col>
                 <Col>
                   <Form.Group
-                    className="mb-4"
+                    className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
                     <Form.Label>Agency Size: </Form.Label>
@@ -372,13 +383,33 @@ function Home() {
                 </Col>
                 <Col>
                   <Form.Group
-                    className="mb-4"
+                    className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
-                    <Form.Label>Location: </Form.Label>
+                    <Form.Label>Agency Location: </Form.Label>
                     <Form.Select
                       aria-label="Default select example"
                       {...register("agencyLocation", { required: true })}
+                    >
+                      <option>United Sates</option>
+                      {options.map((x) => (
+                        <option key={x.value}>{x.label}</option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+
+                <Col>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label>Target Customer Location: </Form.Label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      {...register("targetCustomerLocation", {
+                        required: true,
+                      })}
                     >
                       <option>United Sates</option>
                       {options.map((x) => (
@@ -519,6 +550,7 @@ function Home() {
           seo3={seo3}
           seo4={seo4}
           seo5={seo5}
+          agencySize={agencySize}
         ></Result>
       )}
     </div>
