@@ -9,3 +9,5 @@ Install dependecies:
 
 Run the Project: 
 -> npm start
+
+start the client
