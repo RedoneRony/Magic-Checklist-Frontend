@@ -1,14 +1,37 @@
+// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
 
+
+
+// TODO: Add SDKs for Firebase products that you want to use
+
+// https://firebase.google.com/docs/web/setup#available-libraries
+
 // Your web app's Firebase configuration
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCC5sNnkjhZn2SpJzV7sK2oVNc0LSVQFis",
-  authDomain: "rechat-f4efd.firebaseapp.com",
-  projectId: "rechat-f4efd",
-  storageBucket: "rechat-f4efd.appspot.com",
-  messagingSenderId: "835052440457",
-  appId: "1:835052440457:web:20837384a477aa9581ef58",
+
+  apiKey: "AIzaSyCjn_jSaBuuvFxE6OpZ-elNyJc_TgRbYww",
+
+  authDomain: "simple-firebase-auth-32.firebaseapp.com",
+
+  projectId: "simple-firebase-auth-32",
+
+  storageBucket: "simple-firebase-auth-32.appspot.com",
+
+  messagingSenderId: "967398305494",
+
+  appId: "1:967398305494:web:e047478a62bc3178456377",
+
+  measurementId: "G-B4XYW6DQQ6"
+
 };
+
+
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

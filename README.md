@@ -4,8 +4,10 @@ First please check how to run a react project in youtube.
 
 Install dependecies:
 
--> npm install 
+-> npm install --f
 
 
 Run the Project: 
 -> npm start
+
+start the client
